@@ -1,0 +1,7 @@
+= karate-snowflake
+
+English talk title : Don't miss your SQL code with a Karate test
+
+French talk title : Ne ratez pas votre SQL avec un test Karate
+
+TODO
