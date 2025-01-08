@@ -15,11 +15,14 @@ Not so great... more complex
 
 image:images/data-pipeline-dirty.jpg[height=290] image:images/data-pipeline-complex.jpg[height=290]
 
-=== Lectra Context
+== Lectra Context
 * cutter events...
 * Data engineer
 * ETL & ELT
 * Kapoeira for ETL
+
+=== ETL
+image::diagrams/data-pipeline-etl.svg[]
 
 == Kapoeira
 * Code: https://github.com/lectra-tech/kapoeira[^]

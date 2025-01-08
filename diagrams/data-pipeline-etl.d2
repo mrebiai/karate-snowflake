@@ -1,0 +1,82 @@
+direction: right
+vars: {
+    d2-config: {
+      #layout-engine: elk
+      sketch: true
+    }
+}
+classes: {
+    animated-arrow: {
+        style {
+            animated: true
+        }
+    }
+    app : {
+        shape: image
+        icon: https://icons.terrastruct.com/tech%2Flaptop.svg
+    }
+}
+
+Cutter: {
+    shape: image
+    icon: ../images/vector.png
+}
+
+Software: {
+    class: app
+}
+
+Extract.AMQPCollector: {
+    shape: image
+    icon: https://www.rabbitmq.com/img/rabbitmq-logo.svg
+}
+Transform.Input: {
+    shape: image
+    icon: ../images/kafka.svg
+}
+Transform.Output: {
+    shape: image
+    icon: ../images/kafka.svg
+}
+Extract.HTTPCollector -> Transform.Input : { class: animated-arrow }
+Extract.AMQPCollector -> Transform.Input : { class: animated-arrow }
+Transform.Input -> Transform.KafkaStream : { class: animated-arrow }
+Transform.KafkaStream -> Transform.Output : { class: animated-arrow }
+  
+Transform.Output -> Load.Connector : { class: animated-arrow }
+Load.Connector -> Load.Table : { class: animated-arrow }
+  
+Load.Table: {
+    shape: cylinder
+    icon: https://companieslogo.com/img/orig/SNOW-35164165.png
+}
+  
+Test : {
+    near: bottom-center
+}
+  
+Test.Kapoeira: {
+    shape: image
+    icon: https://raw.githubusercontent.com/lectra-tech/kapoeira/main/docs/logos/kapoeira_logo.svg
+}
+
+RealTimeApp: {
+    class: app
+}
+
+DashboardingApp: {
+    class: app
+}
+  
+Test.Kapoeira -> Transform.Input : { class: animated-arrow }
+Transform.Output -> Test.Kapoeira : { class: animated-arrow }
+
+Cutter -> Extract.HTTPCollector : { class: animated-arrow }
+Software -> Extract.AMQPCollector : { class: animated-arrow }
+
+Transform.Output -> RealTimeApp : { class: animated-arrow }
+Load.Table <- DashboardingApp
+
+DashboardingApp : {
+    near: bottom-right
+}
