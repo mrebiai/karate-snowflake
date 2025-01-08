@@ -1,0 +1,9 @@
+public
+*.log
+*.pdf
+*.html
+*.jar
+target
+build
+index.adoc
+

@@ -1,0 +1,72 @@
+body:before {
+    content: 'Karate - Snowflake';
+    font-family: Georgia, serif;
+    font-weight: bold;
+    position: fixed;
+    padding: 1em;
+    width: 100%;
+    bottom: 0;
+    height: 2em;
+    color: #8B0000;
+    background-color: lightgrey;
+    text-align: center;
+    font-size: 1rem;
+}
+
+body:after {
+    content: 'Mehdi Rebiai';
+    font-family: Georgia, serif;
+    font-weight: bold;
+    position: fixed;
+    padding: 1em;
+    bottom: 0;
+    left: 1em;
+    height: 2em;
+    font-size: 1rem;
+    color: #8B0000;
+    text-align: center;
+}
+
+.reveal:before {
+    content: ' ';
+    position: fixed;
+    padding: 1em;
+    width: 10em;
+    height: 10em;
+    background: url("data:image/png;base64,${QRCODE_PNG_BASE64}");
+    background-repeat: no-repeat;
+}
+
+.reveal:after {
+    content: ' ';
+    position: fixed;
+    top: 0;
+    right: 0;
+    padding: 1em;
+    width: 10em;
+    height: 10em;
+    background: url("data:image/png;base64,${CONFERENCE_PNG_BASE64}");
+    background-repeat: no-repeat;
+    background-position: right top;
+}
+
+.reveal h2 {
+    color: #8B0000;
+}
+
+.reveal h1 {
+    color: #8B0000;
+}
+
+.footer {
+    position: absolute;
+    display: table;
+    width: 100%;
+    bottom: 0;
+    color: #0988d5
+}
+
+.reveal code {
+    font-size: 0.7em;
+    line-height: 1.2em;
+}

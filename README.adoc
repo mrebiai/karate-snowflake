@@ -1,7 +1,10 @@
 = karate-snowflake
 
-English talk title : Don't miss your SQL code with a Karate test
+== Talk Title
+* EN: *Don't miss your SQL code with a Karate test*
+* FR: *Ne ratez pas votre SQL avec un test Karate*
 
-French talk title : Ne ratez pas votre SQL avec un test Karate
 
-TODO
+== Abstract
+link:abstract_fr.adoc[FR^]
+
