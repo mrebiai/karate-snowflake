@@ -1,8 +1,8 @@
 = karate-snowflake
 
 == Talk Title
-* EN: *Don't miss your SQL code with a Karate test*
-* FR: *Ne ratez pas votre SQL avec un test Karate*
+* *EN*: _Don't miss your SQL code with a Karate test_
+* *FR*: _Ne ratez pas votre SQL avec un test Karate_
 
 
 == Abstract

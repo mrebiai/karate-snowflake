@@ -50,11 +50,12 @@ body:after {
     background-position: right top;
 }
 
-.reveal h2 {
+.reveal h1 {
+    font-family: "Montserrat", Impact, sans-serif;
     color: #8B0000;
 }
 
-.reveal h1 {
+.reveal h2 {
     color: #8B0000;
 }
 

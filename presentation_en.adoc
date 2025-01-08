@@ -1,7 +1,31 @@
-= Karate / Snowflake
+= 🥋 Karate  🥰 ❄️ Snowflake
 
-== Slide 1
+🇫🇷 _Ne ratez pas votre SQL avec un test Karate_
 
-== Slide 2
+🇬🇧 _Don't miss your SQL code with a Karate test_
 
-=== Slide 2.1
+
+== 🪄 Once upon a time... ✨
+A great data pipeline !
+
+image::images/data-pipeline-simple.png[]
+
+=== But sometimes... 😥
+Not so great... more complex
+
+image:images/data-pipeline-dirty.jpg[height=290] image:images/data-pipeline-complex.jpg[height=290]
+
+=== Lectra Context
+* cutter events...
+* Data engineer
+* ETL & ELT
+* Kapoeira for ETL
+
+== Kapoeira
+* Code: https://github.com/lectra-tech/kapoeira[^]
+* Slides: https://jvauchel.github.io/kapoeira-dance/[^]
+* Devoxx France 2024: https://youtu.be/ELFCAgdgSro[^]
+
+== Karate
+TODO
+
