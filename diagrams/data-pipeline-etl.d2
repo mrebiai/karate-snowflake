@@ -1,12 +1,20 @@
 ...@common
 
 Cutter: {
+    class: component
     shape: image
     icon: ../images/vector.png
 }
 
 Software: { class: app }
 ETL: { class: title }
+Extract: { class: box }
+Transform: { class: box }
+Load: { class: box }
+Test: { class: box }
+Transform.KafkaStream: { class : component }
+Load.Connector: { class: component }
+Extract.HTTPCollector: { class: component }
 Extract.AMQPCollector: { class: amqp }
 Transform.Input: { class: kafka }
 Transform.Output: { class: kafka }
@@ -22,6 +30,7 @@ Load.Table: { class: table }
 Test : { near: bottom-center }
   
 Test.Kapoeira: {
+    class: component
     shape: image
     icon: ../images/kapoeira.svg
 }

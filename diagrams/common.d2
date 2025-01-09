@@ -4,6 +4,9 @@ vars: {
       sketch: true
       theme-id: 1 # Neutral gray
     }
+    component-font-size: 25
+    box-font-size: 50
+    title-font-size: 70
 }
 classes: {
     arrow: {
@@ -13,25 +16,47 @@ classes: {
     }
     app: {
         shape: image
-        icon: https://icons.terrastruct.com/azure%2FCompute%20Service%20Color%2FCloud%20Services%20%28Classic%29.svg
+        icon: ../images/app.svg
+        style: {
+            font-size: ${component-font-size}
+        }
+    }
+    component: {
+        style: {
+            font-size: ${component-font-size}
+        }
+    }
+    box: {
+        style: {
+            font-size: ${box-font-size}
+        }
     }
     amqp: {
         shape: image
         icon: ../images/rabbitmq.svg
+        style: {
+            font-size: ${component-font-size}
+        }
     }
     kafka: {
         shape: image
         icon: ../images/kafka.svg
+        style: {
+            font-size: ${component-font-size}
+        }
     }
     table: {
         shape: cylinder
         icon: ../images/snowflake.png
+        style: {
+            font-size: ${component-font-size}
+        }
     }
     title: {
         near: top-left
         shape: text
         style: {
-            font-size: 70;
+            font-size: ${title-font-size};
             font-color: "#8B0000"
         }
     }

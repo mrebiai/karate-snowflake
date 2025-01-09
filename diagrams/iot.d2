@@ -1,0 +1,38 @@
+...@common
+direction: down
+
+LectraContext: {
+    label: Lectra context
+    class: title
+    near: top-center
+}
+
+Cutter: {
+    class: component
+    shape: image
+    icon: ../images/vector.png
+    width: 400
+    height: 300
+}
+
+Software: { class: app }
+
+Cloud: {
+    class: box
+    shape: cloud
+}
+
+Cutter -> Cloud: {
+    label: Cutting, Stopped, Error...
+    class: component
+}
+Software -> Cloud: {
+    label: Usage, Data...
+    class: component
+}
+Cloud.Dashboards : {
+    shape: image
+    class: component
+    icon: ../images/dashboards.png
+
+}

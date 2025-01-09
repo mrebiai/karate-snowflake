@@ -1,4 +1,7 @@
 = 🥋 Karate  🥰 ❄️ Snowflake
+:source-highlighter: highlight.js
+:highlightjs-languages: gherkin
+:icons: font
 
 🇫🇷 _Ne ratez pas votre SQL avec un test Karate_
 
@@ -10,31 +13,54 @@ A great data pipeline !
 
 image::images/data-pipeline-simple.png[]
 
-=== But sometimes... 😥
+[%notitle]
+=== Lectra Context
+image::diagrams/iot.svg[background,size=contain]
+
+=== $ whoami 👨‍💻
+* Mehdi REBIAI
+* 🧑‍🔧 Tech Lead & Data Engineer @Lectra
+* icon:github[] https://github.com/mrebiai
+* https://github.com/lectra-tech/kapoeira[Kapoeira Maintainer]
+
+=== A great pipeline... but sometimes... 😥
 Not so great... more complex
 
 image:images/data-pipeline-dirty.jpg[height=290] image:images/data-pipeline-complex.jpg[height=290]
 
-== Lectra Context
-* cutter events...
-* Data engineer
-* ETL & ELT
-* Kapoeira for ETL
+=== 💡We need Tests 🤗 & QA 🕵️ 🐛
 
+But also some tools...
+
+== Let's talk about architecture 👷
+
+ETL vs ELT...
 
 [%notitle]
 === ETL
 image::diagrams/data-pipeline-etl.svg[background,size=contain]
 
+=== Kapoeira - Information
+* Gherkin & Cucumber (Scala)
+* Code: https://github.com/lectra-tech/kapoeira[^]
+* video::https://youtu.be/ELFCAgdgSro[]
+* Slides: https://jvauchel.github.io/kapoeira-dance/[^]
+
+=== Kapoeira - Example (1/2)
+image::images/burger-factory.svg[]
+
+=== Kapoeira - Example (2/2)
+[source, gherkin]
+----
+include::features/kapoeira/burger-factory.feature[]
+----
+
 [%notitle]
 === ELT
 image::diagrams/data-pipeline-elt.svg[background,size=contain]
 
-== Kapoeira
-* Code: https://github.com/lectra-tech/kapoeira[^]
-* Slides: https://jvauchel.github.io/kapoeira-dance/[^]
-* Devoxx France 2024: https://youtu.be/ELFCAgdgSro[^]
-
-== Karate
-TODO
+=== Karate - Information
+* Gherkin
+* Code: https://github.com/karatelabs/karate[^]
+* TODO
 

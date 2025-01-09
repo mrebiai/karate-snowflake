@@ -33,10 +33,9 @@ body:after {
     padding: 1em;
     width: 10em;
     height: 10em;
-    background: url("data:image/png;base64,${QRCODE_PNG_BASE64}");
+    background-image: url("data:image/png;base64,${QRCODE_PNG_BASE64}");
     background-repeat: no-repeat;
     background-position: left top;
-    display: block;
 }
 
 .reveal:after {
@@ -47,7 +46,7 @@ body:after {
     padding: 1em;
     width: 10em;
     height: 10em;
-    background: url("data:image/png;base64,${CONFERENCE_PNG_BASE64}");
+    background-image: url("data:image/png;base64,${CONFERENCE_PNG_BASE64}");
     background-repeat: no-repeat;
     background-position: right top;
 }

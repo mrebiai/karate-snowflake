@@ -1,8 +1,15 @@
 ...@common
 
-Software: { class: app }
+Software: { 
+    class: app;
+}
 DashboardingApp: { class: app }
 ELT: { class: title }
+Extract: { class: box }
+Transform: { class: box }
+Load: { class: box }
+Test: { class: box }
+Load.Connector: { class: component }
 Extract.AMQPCollector: { class: amqp }
 Extract.RAW: { class: kafka }
 Extract.AMQPCollector -> Extract.RAW : { class: arrow }
@@ -11,29 +18,28 @@ Load.Connector -> Load.TableRAW : { class: arrow }
 Load.TableRAW: { class: table }
 Transform.Task: { 
     shape: rectangle
-    class: table 
+    class: table
 }
 Transform.DBT: {
+    class: app
     shape: image
     icon: ../images/dbt.png
 }  
-Transform.TableGold: {
-    shape: cylinder
-    icon: https://companieslogo.com/img/orig/SNOW-35164165.png
-}
+Transform.TableGOLD: { class: table }
 Load.TableRAW -> Transform.DBT: { class: arrow }
 Load.TableRAW -> Transform.Task: { class: arrow }
-Transform.DBT -> Transform.TableGold: { class: arrow }
-Transform.Task -> Transform.TableGold: { class: arrow }
-Transform.TableGold <- DashboardingApp
+Transform.DBT -> Transform.TableGOLD: { class: arrow }
+Transform.Task -> Transform.TableGOLD: { class: arrow }
+Transform.TableGOLD <- DashboardingApp
 Software -> Extract.AMQPCollector: { class: arrow }
 
 Test : { near: bottom-center }
   
 Test.Karate: {
+    class: app
     shape: image
     icon: ../images/karate.png
 }
 
 Test.Karate -> Load.TableRAW: { class: arrow }
-Transform.TableGold -> Test.Karate: { class: arrow }
+Transform.TableGOLD -> Test.Karate: { class: arrow }
