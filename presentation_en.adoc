@@ -21,8 +21,14 @@ image:images/data-pipeline-dirty.jpg[height=290] image:images/data-pipeline-comp
 * ETL & ELT
 * Kapoeira for ETL
 
+
+[%notitle]
 === ETL
-image::diagrams/data-pipeline-etl.svg[]
+image::diagrams/data-pipeline-etl.svg[background,size=contain]
+
+[%notitle]
+=== ELT
+image::diagrams/data-pipeline-elt.svg[background,size=contain]
 
 == Kapoeira
 * Code: https://github.com/lectra-tech/kapoeira[^]

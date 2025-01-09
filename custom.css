@@ -35,6 +35,8 @@ body:after {
     height: 10em;
     background: url("data:image/png;base64,${QRCODE_PNG_BASE64}");
     background-repeat: no-repeat;
+    background-position: left top;
+    display: block;
 }
 
 .reveal:after {

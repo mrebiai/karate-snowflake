@@ -1,82 +1,46 @@
-direction: right
-vars: {
-    d2-config: {
-      #layout-engine: elk
-      sketch: true
-    }
-}
-classes: {
-    animated-arrow: {
-        style {
-            animated: true
-        }
-    }
-    app : {
-        shape: image
-        icon: https://icons.terrastruct.com/tech%2Flaptop.svg
-    }
-}
+...@common
 
 Cutter: {
     shape: image
     icon: ../images/vector.png
 }
 
-Software: {
-    class: app
-}
-
-Extract.AMQPCollector: {
-    shape: image
-    icon: https://www.rabbitmq.com/img/rabbitmq-logo.svg
-}
-Transform.Input: {
-    shape: image
-    icon: ../images/kafka.svg
-}
-Transform.Output: {
-    shape: image
-    icon: ../images/kafka.svg
-}
-Extract.HTTPCollector -> Transform.Input : { class: animated-arrow }
-Extract.AMQPCollector -> Transform.Input : { class: animated-arrow }
-Transform.Input -> Transform.KafkaStream : { class: animated-arrow }
-Transform.KafkaStream -> Transform.Output : { class: animated-arrow }
+Software: { class: app }
+ETL: { class: title }
+Extract.AMQPCollector: { class: amqp }
+Transform.Input: { class: kafka }
+Transform.Output: { class: kafka }
+Extract.HTTPCollector -> Transform.Input : { class: arrow }
+Extract.AMQPCollector -> Transform.Input : { class: arrow }
+Transform.Input -> Transform.KafkaStream : { class: arrow }
+Transform.KafkaStream -> Transform.Output : { class: arrow }
+Transform.Output -> Load.Connector : { class: arrow }
+Load.Connector -> Load.Table : { class: arrow }
   
-Transform.Output -> Load.Connector : { class: animated-arrow }
-Load.Connector -> Load.Table : { class: animated-arrow }
+Load.Table: { class: table }
   
-Load.Table: {
-    shape: cylinder
-    icon: https://companieslogo.com/img/orig/SNOW-35164165.png
-}
-  
-Test : {
-    near: bottom-center
-}
+Test : { near: bottom-center }
   
 Test.Kapoeira: {
     shape: image
-    icon: https://raw.githubusercontent.com/lectra-tech/kapoeira/main/docs/logos/kapoeira_logo.svg
+    icon: ../images/kapoeira.svg
 }
 
 RealTimeApp: {
     class: app
+    near: top-center
 }
 
 DashboardingApp: {
     class: app
-}
-  
-Test.Kapoeira -> Transform.Input : { class: animated-arrow }
-Transform.Output -> Test.Kapoeira : { class: animated-arrow }
-
-Cutter -> Extract.HTTPCollector : { class: animated-arrow }
-Software -> Extract.AMQPCollector : { class: animated-arrow }
-
-Transform.Output -> RealTimeApp : { class: animated-arrow }
-Load.Table <- DashboardingApp
-
-DashboardingApp : {
     near: bottom-right
 }
+  
+Test.Kapoeira -> Transform.Input : { class: arrow }
+Transform.Output -> Test.Kapoeira : { class: arrow }
+
+Cutter -> Extract.HTTPCollector : { class: arrow }
+Software -> Extract.AMQPCollector : { class: arrow }
+
+Transform.Output -> RealTimeApp : { class: arrow }
+Load.Table <- DashboardingApp
