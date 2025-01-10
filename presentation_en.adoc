@@ -40,14 +40,25 @@ ETL vs ELT...
 === ETL
 image::diagrams/data-pipeline-etl.svg[background,size=contain]
 
-=== Kapoeira - Information
+=== image:images/snowflake-text.png[]
+* Data Cloud... DBMS++
+* Snowpark, Stream/Task...
+* STORAGE 💰 dissociated from COMPUTE 💰💰💰
+* Scalable COMPUTE
+
+[.columns]
+=== image:images/kapoeira-text.svg[width=100]
+[.column]
+* Kafka IT tests with JAR or Docker Image
 * Gherkin & Cucumber (Scala)
 * Code: https://github.com/lectra-tech/kapoeira[^]
-* video::https://youtu.be/ELFCAgdgSro[]
 * Slides: https://jvauchel.github.io/kapoeira-dance/[^]
 
+[.column]
+video::ELFCAgdgSro[youtube, width=500]
+
 === Kapoeira - Example (1/2)
-image::images/burger-factory.svg[]
+image::images/burger-factory.svg[width=800]
 
 === Kapoeira - Example (2/2)
 [source, gherkin]
@@ -59,8 +70,42 @@ include::features/kapoeira/burger-factory.feature[]
 === ELT
 image::diagrams/data-pipeline-elt.svg[background,size=contain]
 
-=== Karate - Information
+[.columns]
+=== image:images/karatelabs.png[width=200]
+[.column]
+* REST API tests (and more...) with a simple JAR
 * Gherkin
 * Code: https://github.com/karatelabs/karate[^]
-* TODO
 
+[.column]
+video::NYlPxd5dZOU[youtube, width=500]
+
+=== Karate - Example
+[source, gherkin]
+----
+include::features/karate/hello-world.feature[]
+----
+
+=== Karate - HTTP+++<br/>+++Snowflake - JDBC SQL+++<br/>+++🤔
+[%step]
+* https://docs.snowflake.com/en/developer-guide/snowflake-rest-api/snowflake-rest-api[Snowflake REST API & Authentication^]
+* https://docs.snowflake.com/en/developer-guide/sql-api/index[Snowflake SQL API^]
+* 😃
+
+[.columns]
+=== INSERT/SELECT Karate ✅+++<br/>+++Run Task & DBT ?🤔
+[.column]
+image::diagrams/data-pipeline-elt.svg[width=500]
+
+[.column]
+[%step]
+* `karate.exec(<command>)`
+* Karate DSL extension - https://github.com/karatelabs/karate-examples[Examples^]
+* 😃
+
+=== Lectra Karate Tool
+* Fat JAR (karate.jar + extensions) or Docker Image (with all you need)
+* 😃
+
+== Lectra Karate Tool
+TODO
