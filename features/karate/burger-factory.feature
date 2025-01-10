@@ -20,7 +20,7 @@ Feature: Demo
 
     Then string selectStatement = "SELECT VALUE FROM BURGER WHERE CLIENT_ID='"+clientId+"'" 
     And def response = karate.runSql({ statement: selectStatement, snowflakeConfig: snowflakeConfigBurger })
-    And match response.data == <output>
+    And match response.data == [ { "VALUE" : "<output>" } ]
 
     Examples:
       | bread | vegetable | meat | output       |
