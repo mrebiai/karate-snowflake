@@ -1,0 +1,18 @@
+...@common
+
+bread: { label: BREAD; class: table }
+vegetable: { label: VEGETABLE; class: table }
+meat: { label: MEAT; class: table }
+burger: { label: BURGER; class: table }
+
+burgerDBT: { 
+    label: "burger-factory 🍔"
+    class: app
+    shape: image
+    icon: ../images/dbt.png
+}
+
+bread -> burgerDBT: { class: arrow }
+vegetable -> burgerDBT: { class: arrow }
+meat -> burgerDBT: { class: arrow }
+burgerDBT -> burger: { class: arrow }
