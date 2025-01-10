@@ -9,8 +9,10 @@
 
 
 == 🪄 Once upon a time... ✨
+[%step]
 A great data pipeline !
 
+[%step]
 image::images/data-pipeline-simple.png[]
 
 [%notitle]
@@ -18,22 +20,24 @@ image::images/data-pipeline-simple.png[]
 image::diagrams/iot.svg[background,size=contain]
 
 === $ whoami 👨‍💻
+[%step]
 * Mehdi REBIAI
 * 🧑‍🔧 Tech Lead & Data Engineer @Lectra
 * icon:github[] https://github.com/mrebiai
 * https://github.com/lectra-tech/kapoeira[Kapoeira Maintainer]
 
 === A great pipeline... but sometimes... 😥
+[%step]
 Not so great... more complex
 
+[%step]
 image:images/data-pipeline-dirty.jpg[height=290] image:images/data-pipeline-complex.jpg[height=290]
 
 === 💡We need Tests 🤗 & QA 🕵️ 🐛
-
+[%step]
 But also some tools...
 
 == Let's talk about architecture 👷
-
 ETL vs ELT...
 
 [%notitle]
@@ -41,6 +45,7 @@ ETL vs ELT...
 image::diagrams/data-pipeline-etl.svg[background,size=contain]
 
 === image:images/snowflake-text.png[]
+[%step]
 * Data Cloud... DBMS++
 * Snowpark, Stream/Task...
 * STORAGE 💰 dissociated from COMPUTE 💰💰💰
@@ -49,12 +54,14 @@ image::diagrams/data-pipeline-etl.svg[background,size=contain]
 [.columns]
 === image:images/kapoeira-text.svg[width=100]
 [.column]
+[%step]
 * Kafka IT tests (JAR / Docker Image)
 * Gherkin & Cucumber (Scala)
 * Code: https://github.com/lectra-tech/kapoeira[^]
 * Slides: https://jvauchel.github.io/kapoeira-dance/[^]
 
 [.column]
+[%step]
 video::ELFCAgdgSro[youtube, width=500]
 
 === Kapoeira - Example (1/2)
@@ -73,11 +80,13 @@ image::diagrams/data-pipeline-elt.svg[background,size=contain]
 [.columns]
 === image:images/karatelabs.png[width=200]
 [.column]
+[%step]
 * REST API tests, and more... (JAR)
 * Gherkin
 * Code: https://github.com/karatelabs/karate[^]
 
 [.column]
+[%step]
 video::NYlPxd5dZOU[youtube, width=500]
 
 === Karate - Example
@@ -114,6 +123,7 @@ image::diagrams/data-pipeline-elt.svg[width=500]
 [%step]
 * Fat JAR (karate.jar + extensions) or Docker Image (with all you need)
 * Retry / timeout configuration
+* Clone / Drop schema for each Scenario
 * Other advanced features
 * 😃
 

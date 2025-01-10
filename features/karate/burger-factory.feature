@@ -11,16 +11,16 @@ Feature: Demo
       | snowflakeConfigBread     | BREAD     | <bread>     |
       | snowflakeConfigVegetable | VEGETABLE | <vegetable> |
       | snowflakeConfigMeat      | MEAT      | <meat>      |
-    And string insertStatement = "INSERT INTO <table>(CLIENT_ID, VALUE) VALUES ('"+clientId+"','<value>')"
-    And def callInserts = function(row) { return karate.runSql({ statement: insertStatement, snowflakeConfig: snowflakeConfig}).responseStatus }
-    And def responses = karate.map(insertStatements, callInserts)
+    And def callInsert = function(row) { return karate.runSql({ statement: "INSERT INTO "+row.table+"(CLIENT_ID, VALUE) VALUES ('"+clientId+"','"+row.value+"')", snowflakeConfig: row.snowflakeConfig}).responseStatus }
+    And def responses = karate.map(inserts, callInserts)
     And match responses contains only 200
     
     When def dbtResponse = karate.exec("dbt run ...")
     And match dbtResponse == "OK"
 
     Then string selectStatement = "SELECT VALUE FROM BURGER WHERE CLIENT_ID='"+clientId+"'" 
-    And karate.runSql({ statement: selectStatement, snowflakeConfig: snowflakeConfigBurger })
+    And def response = karate.runSql({ statement: selectStatement, snowflakeConfig: snowflakeConfigBurger })
+    And match response.data == <output>
 
     Examples:
       | bread | vegetable | meat | output       |
