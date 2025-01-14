@@ -1,10 +1,12 @@
 #!/usr/bin/env bash
 
+HTTP_REPO_URL="https://github.com/mrebiai/karate-snowflake"
 ASCIIDOCTOR_DOCKER_IMAGE="asciidoctor/docker-asciidoctor:1.81.0"
 REVEALJS_DIR="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0"
 CONFERENCES=("bdxtestingcommunity")
 
 cat README.adoc > index.adoc
+sed -i 's|link:abstract_fr.adoc.*|'${HTTP_REPO_URL}'/blob/main/abstract_fr.adoc[FR^]|' index.adoc
 echo -e "\n== Slides\n" >> index.adoc
 
 rm -rf public
