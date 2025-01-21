@@ -1,16 +1,16 @@
-Feature: SELECT
+Feature: SELECT V1
   Background:
     * url "https://<SNOWFLAKE_ACCOUNT>.snowflakecomputing.com/api/v2"
-    * def jwt = karate.exec("snow connection generate-jwt --silent --account <SNOWFLAKE_ACCOUNT> --user <SNOWFLAKE_USER> --private-key-file <SNOWFLAKE_USER_PEM>")
-    * def bearer = "Bearer " + jwt
+    * string jwtToken = karate.exec("snow connection generate-jwt --silent --account <SNOWFLAKE_ACCOUNT> --user <SNOWFLAKE_USER> --private-key-file <SNOWFLAKE_USER_PEM>")
+    * header Content-Type = "application/json"
+    * header Accept = "application/json"
+    * header Authorization = "Bearer " + jwtToken
+    * header User-Agent = "<MY_APP_IT>"
+    * header X-Snowflake-Authorization-Token-Type = "KEYPAIR_JWT"
+
   Scenario: Select 1 cutter
     Given path "statements"
-    And header Content-Type = "application/json"
-    And header Accept = "application/json"
-    And header Authorization = bearer
-    And header User-Agent = "<MY_APP_IT>"
-    And header X-Snowflake-Authorization-Token-Type = "KEYPAIR_JWT"
-    And def payload = 
+    And text payload =
         """
         {
           "statement": "SELECT SERIAL_NUMBER, CUTTER_TYPE FROM CUTTER WHERE SERIAL_NUMBER='MY_VECTOR'",

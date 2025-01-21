@@ -126,7 +126,7 @@ image::diagrams/data-pipeline-elt.svg[width=500]
 * `karate.exec(<any_command>)`
 * 😃
 
-=== 💡Lectra Karate Tool+++<br/>+++💪😎👍
+== 💡Lectra `karate-data`+++<br/>+++💪😎👍
 [%step]
 * Fat JAR (karate.jar + extensions) or Docker Image (with all you need)
 * Retry / timeout configuration
@@ -134,13 +134,35 @@ image::diagrams/data-pipeline-elt.svg[width=500]
 * Other advanced features
 * 😃
 
-=== Karate/Snowflake - Example V2
+=== Karate/Snowflake - Example
 [source, gherkin]
 ----
 include::features/karate/select-v2.feature[]
 ----
 
 + `karate-config.js` for configuration
+
+=== `snowflake` DSL
+.`cli`
+[source, javascript]
+----
+snowflake.cli.generateJwtToken({ account: "...", user: "...", privateKeyPath: "...", privateKeyPassphrase: "..." })
+snowflake.cli.runSql({ statement: "...", cliConfig: { ... }, snowflakeConfig: { ... } })
+...
+----
+
+.`rest`
+[source, javascript]
+----
+snowflake.rest.runSql({ statement: "...", cliConfig: {... }, snowflakeConfig: { ... }, jwtToken: "... Optional" })
+...
+----
+
+=== `kubernetes` DSL
+TODO
+
+=== `rabbitmq` DSL
+TODO
 
 [.columns]
 == Demo Time 🎬
