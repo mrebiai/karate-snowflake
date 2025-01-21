@@ -77,6 +77,13 @@ include::features/kapoeira/burger-factory.feature[]
 === ELT
 image::diagrams/data-pipeline-elt.svg[background,size=contain]
 
+=== image:images/dbt-text.svg[width=200]
+[%step]
+* Python tool for data transformation
+* SQL generation through Jinja2 templates
+* Code: https://github.com/dbt-labs/dbt-utils[^]
+* Since `v1.8`, https://docs.getdbt.com/docs/build/unit-tests[unit tests^]
+
 [.columns]
 === image:images/karatelabs.png[width=200]
 [.column]
