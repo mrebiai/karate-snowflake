@@ -1,0 +1,13 @@
+version: 2
+
+sources:
+  - name: burger_input
+    schema: "{{ env_var('SNOWFLAKE_SCHEMA_SOURCE') }}"
+    tables:
+      - name: bread
+      - name: vegetable
+      - name: meat
+
+models:
+ - name: burger
+

@@ -6,4 +6,7 @@ public
 target
 build
 index.adoc
-
+.idea
+.vscode
+py_venv
+demo.env

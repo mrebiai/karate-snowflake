@@ -1,0 +1,33 @@
+...@common
+
+BURGER_INPUT: {
+    class: component
+    bread: { 
+        label: BREAD
+        class: sql_table
+        CLIENT_ID: STRING
+        VALUE: STRING
+    }
+    vegetable: { 
+        label: VEGETABLE
+        class: sql_table
+        CLIENT_ID: STRING
+        VALUE: STRING
+    }
+    meat: { 
+        label: MEAT
+        class: sql_table
+        CLIENT_ID: STRING
+        VALUE: STRING
+    }
+}
+BURGER_OUTPUT: {
+    class: component
+    near: center-right
+    burger: { 
+        label: BURGER
+        class: sql_table
+        CLIENT_ID: STRING
+        VALUE: STRING
+    }
+}

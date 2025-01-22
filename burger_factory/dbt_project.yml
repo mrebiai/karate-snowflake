@@ -1,0 +1,14 @@
+name: 'burger_factory'
+version: '1.0.0'
+profile: 'burger_factory'
+
+model-paths: ["models"]
+test-paths: ["tests"]
+
+clean-targets:
+  - "target"
+ 
+# on-run-start:
+#   - TRUNCATE TABLE {{ ref('burger') }}
+#   - CALL SYSTEM$WAIT(10, 'SECONDS')
+

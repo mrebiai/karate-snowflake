@@ -1,0 +1,33 @@
+unit_tests:
+
+  - name: create_a_burger
+    model: burger
+    given:
+      - input: source("burger_input", "bread")
+        rows:
+          - { CLIENT_ID: "😋", VALUE: "🍞" }
+      - input: source("burger_input", "vegetable")
+        rows:
+          - { CLIENT_ID: "😋", VALUE: "🍅" }
+      - input: source("burger_input", "meat")
+        rows:
+          - { CLIENT_ID: "😋", VALUE: "🥩" }
+    expect:
+      rows:
+        - { CLIENT_ID: "😋", VALUE: "🍔" }
+
+  - name: create_a_non_burger
+    model: burger
+    given:
+      - input: source("burger_input", "bread")
+        rows:
+          - { CLIENT_ID: "😋", VALUE: "🍞" }
+      - input: source("burger_input", "vegetable")
+        rows:
+          - { CLIENT_ID: "😋", VALUE: "🥕" }
+      - input: source("burger_input", "meat")
+        rows:
+          - { CLIENT_ID: "😋", VALUE: "🥩" }
+    expect:
+      rows:
+        - { CLIENT_ID: "😋", VALUE: "🍞 + 🥕 + 🥩" }      

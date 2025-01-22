@@ -174,10 +174,19 @@ Kafka version+++<br/>+++image:images/burger-factory.svg[width=600]
 [.column]
 Snowflake version+++<br/>+++image:diagrams/burger-factory.svg[width=400]
 
+=== DDL
+image::diagrams/ddl.svg[width=600]
+
 === `burger-factory.feature`
 [source, gherkin]
 ----
-include::features/karate/burger-factory.feature[]
+include::burger_factory/it/features/burger-factory.feature[]
+----
+
+=== Clone schemas...
+[source, gherkin]
+----
+include::burger_factory/it/features/burger-factory-clone-schemas.feature[]
 ----
 
 == Next Steps 🚀
