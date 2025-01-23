@@ -126,13 +126,65 @@ image::diagrams/data-pipeline-elt.svg[width=500]
 * `karate.exec(<any_command>)`
 * 😃
 
-== 💡Lectra `karate-data`+++<br/>+++💪😎👍
+[.columns]
+== 💡`karate-data`=extensions
 [%step]
-* Fat JAR (karate.jar + extensions) or Docker Image (with all you need)
+[.column width="70%"]
+* ☕`karate-data-standalone.jar`
+** `karate-core.jar` 
+** `karate-data.jar`
+*** `snowflake`, `kubernetes`
+*** +++<p style="color: lightgrey">+++`rabbitmq`, `kafka`+++</p>+++
+
+[%step]
+[.column]
+* 🐳 image `karate-data` 
+** `karate-data-standalone.jar`
+** `dbt`, `snowflake-cli`, `kubectl`
+
+=== How to run ?
+[%step]
+.Standalone JAR
+[source, bash]
+----
+java -cp karate-data-standalone.jar \
+    -Dextensions=<ext1,ext2...> \
+    com.intuit.karate.Main <features_path> <optional_params...>
+----
+
+[%step]
+.Docker image
+[source, bash, indent=0]
+----
+docker run --rm \
+  -v $(pwd)/<features_path>:/features \
+  -v $(pwd)/<reports_path>:/target \
+  -e KARATE_EXTENSIONS=<ext1,ext2...>  -e ... \
+  karate-data:latest <optional_params...>
+----
+
+=== `snowflake` extension config
+[%step]
+.`cli-config`
+[source, bash]
+----
+include::demo-template.env[lines=1..4]
+----
+
+[%step]
+.`snowflake-config`
+[source, bash]
+----
+include::demo-template.env[lines=6..10]
+----
+
+=== `snowflake` extension
+* Config with env vars or JS files
+* JWT generation
+* SQL execution
 * Retry / timeout configuration
-* Clone / Drop schema for each Scenario
-* Other advanced features
-* 😃
+* Clone / Drop schema
+* And more...😃
 
 === Karate/Snowflake - Example
 [source, gherkin]
@@ -140,29 +192,17 @@ image::diagrams/data-pipeline-elt.svg[width=500]
 include::features/karate/select-v2.feature[]
 ----
 
-+ `karate-config.js` for configuration
-
-=== `snowflake` DSL
-.`cli`
+=== `karate-config.js` for more configurations
 [source, javascript]
 ----
-snowflake.cli.generateJwtToken({ account: "...", user: "...", privateKeyPath: "...", privateKeyPassphrase: "..." })
-snowflake.cli.runSql({ statement: "...", cliConfig: { ... }, snowflakeConfig: { ... } })
-...
+function fn() {
+  const mySuperFunction = (input) => input.toUpperCase();
+  return {
+    "projectName": "mySuperProject",
+    "myFunction": mySuperFunction
+  };
+}
 ----
-
-.`rest`
-[source, javascript]
-----
-snowflake.rest.runSql({ statement: "...", cliConfig: {... }, snowflakeConfig: { ... }, jwtToken: "... Optional" })
-...
-----
-
-=== `kubernetes` DSL
-TODO
-
-=== `rabbitmq` DSL
-TODO
 
 [.columns]
 == Demo Time 🎬
@@ -176,6 +216,21 @@ Snowflake version+++<br/>+++image:diagrams/burger-factory.svg[width=400]
 
 === DDL
 image::diagrams/ddl.svg[width=600]
+
+=== How to run ?
+[%step]
+.Standalone JAR
+[source, bash, indent=0]
+----
+include::demo.sh[tags=karate_jar]
+----
+
+[%step]
+.Docker image
+[source, bash, indent=0]
+----
+include::demo.sh[tags=karate_docker]
+----
 
 === `burger-factory.feature`
 [source, gherkin]
@@ -191,8 +246,17 @@ include::burger_factory/it/features/burger-factory-clone-schemas.feature[]
 
 == Next Steps 🚀
 * Open Source
+** https://github.com/lectra-tech/karate-data 
+** ☕ & 🐳
+* Extension `rabbitmq` & `kafka`
 
-== 🎉 Thank you 🙏
-Questions ?
+[background-color="white"]
+[.columns]
+== 🎉 Thank you - Questions?
+[.column]
+Slides 🖥️::
+image:images/qrcode-slides.png[width=300]
 
-Feedback TODO
+[.column]
+Feedback🙏::
+image:images/qrcode-feedback.png[width=300]
