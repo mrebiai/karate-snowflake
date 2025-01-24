@@ -3,7 +3,7 @@ Feature: SELECT V2
     * json cliConfig = read('classpath:cli-config.json')
     * json snowflakeConfig = read('classpath:snowflake-config.json')
     * string jwtToken = snowflake.cli.generateJwtToken(cliConfig)
-    * json restConfig = ({ jwtToken, cliConfig, snowflakeConfig })
+    * json restConfig = ({jwtToken, cliConfig, snowflakeConfig})
 
   Scenario: Select 1 cutter
     Given text statement =
@@ -12,7 +12,7 @@ Feature: SELECT V2
       FROM CUTTER
       WHERE SERIAL_NUMBER='MY_VECTOR'
     """
-    And def response = snowflake.rest.runSql({...restConfig, statement: statement})
+    And def response = snowflake.rest.runSql({...restConfig, statement})
     And table expectedData
       | SERIAL_NUMBER | CUTTER_TYPE |
       | "MY_VECTOR"   | "VECTOR"    |

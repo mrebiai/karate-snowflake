@@ -176,20 +176,55 @@ function fn() {
 }
 ----
 
+See https://karatelabs.github.io/karate/#environment-specific-config[karate documentation^] for file location
+
+[.columns]
 === `snowflake` extension config
 [%step]
-.`cli-config`
+[.column]
+--
 [source, bash]
+.`cli-config`
 ----
-include::demo-template.env[lines=1..4]
+SNOWFLAKE_ACCOUNT=xxx.west-europe.azure
+SNOWFLAKE_USER=MY_USER
+SNOWFLAKE_PRIVATE_KEY_PATH=/my-path/private-key.pem
+PRIVATE_KEY_PASSPHRASE=my-passphrase
 ----
 
+[source, javascript]
+----
+{ 
+  "account": "xxx.west-europe.azure",
+  "user": "MY_USER",
+  "privateKeyPath": "/my-path/private-key.pem",
+  "privateKeyPassphrase": "my-passphrase"
+}
+----
+--
+
 [%step]
+[.column]
+--
 .`snowflake-config`
 [source, bash]
 ----
-include::demo-template.env[lines=6..10]
+SNOWFLAKE_DATABASE=MY_DB
+SNOWFLAKE_SCHEMA=MY_SCHEMA
+SNOWFLAKE_ROLE=MY_ROLE
+SNOWFLAKE_WAREHOUSE=MY_WH
 ----
+
+[source, javascript]
+----
+{
+  "database": "MY_DB",
+  "schema": "MY_SCHEMA"
+  "role": "MY_ROLE",
+  "warehouse": "MY_WH"
+}
+----
+--
 
 === `snowflake` extension
 * Config with env vars, JS files...
