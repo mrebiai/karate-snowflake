@@ -10,3 +10,5 @@ index.adoc
 .vscode
 py_venv
 demo.env
+logs
+

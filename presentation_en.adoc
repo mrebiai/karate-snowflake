@@ -55,7 +55,7 @@ image::diagrams/data-pipeline-etl.svg[background,size=contain]
 === image:images/kapoeira-text.svg[width=100]
 [.column]
 [%step]
-* Kafka IT tests (JAR / Docker Image)
+* Kafka IT tests (☕ / 🐳)
 * Gherkin & Cucumber (Scala)
 * Code: https://github.com/lectra-tech/kapoeira[^]
 * Slides: https://jvauchel.github.io/kapoeira-dance/[^]
@@ -88,7 +88,7 @@ image::diagrams/data-pipeline-elt.svg[background,size=contain]
 === image:images/karatelabs.png[width=200]
 [.column]
 [%step]
-* REST API tests, and more... (JAR)
+* REST API tests, and more... (☕)
 * Gherkin
 * Code: https://github.com/karatelabs/karate[^]
 
@@ -105,7 +105,7 @@ include::features/karate/hello-world.feature[]
 === Karate - HTTP+++<br/>+++Snowflake - JDBC SQL+++<br/>+++🤔
 [%step]
 * https://docs.snowflake.com/en/developer-guide/snowflake-rest-api/snowflake-rest-api[Snowflake REST API & Authentication^]
-* https://docs.snowflake.com/developer-guide/snowflake-cli/index[Snowflake CLI^] for JWT generation
+* https://docs.snowflake.com/developer-guide/snowflake-cli/index[Snowflake CLI^] (JWT generation,...)
 * https://docs.snowflake.com/en/developer-guide/sql-api/index[Snowflake SQL API^]
 * 😃
 
@@ -127,24 +127,24 @@ image::diagrams/data-pipeline-elt.svg[width=500]
 * 😃
 
 [.columns]
-== 💡`karate-data`=extensions
+== 💡 `karate-data`+++<br/>+++🧩 extensions
 [%step]
-[.column width="70%"]
-* ☕`karate-data-standalone.jar`
-** `karate-core.jar` 
-** `karate-data.jar`
-*** `snowflake`, `kubernetes`
-*** +++<p style="color: lightgrey">+++`rabbitmq`, `kafka`+++</p>+++
+[.column width="65%"]
+* ☕ `karate-data-standalone.jar`
+** ☕ `karate-core.jar` image:images/karatelabs.png[width=60]
+** ☕ `karate-data.jar` image:images/lectra.png[width=80]
+*** 🧩 `snowflake`, `kubernetes`
+*** +++<p style="color: lightgrey">+++🧩 `rabbitmq`, `kafka`+++</p>+++
 
 [%step]
 [.column]
-* 🐳 image `karate-data` 
-** `karate-data-standalone.jar`
-** `dbt`, `snowflake-cli`, `kubectl`
+* 🐳 `karate-data` 
+** ☕ `karate-data-standalone.jar`
+** 🛠️ `dbt`, `kubectl`, `snowflake-cli`
 
 === How to run ?
 [%step]
-.Standalone JAR
+.☕
 [source, bash]
 ----
 java -cp karate-data-standalone.jar \
@@ -153,7 +153,7 @@ java -cp karate-data-standalone.jar \
 ----
 
 [%step]
-.Docker image
+.🐳
 [source, bash, indent=0]
 ----
 docker run --rm \
@@ -161,6 +161,19 @@ docker run --rm \
   -v $(pwd)/<reports_path>:/target \
   -e KARATE_EXTENSIONS=<ext1,ext2...>  -e ... \
   karate-data:latest <optional_params...>
+----
+
+=== How to customize ?
+.`karate-config.js`
+[source, javascript]
+----
+function fn() {
+  const mySuperFunction = (input) => input.toUpperCase();
+  return {
+    "projectName": "mySuperProject",
+    "myFunction": mySuperFunction
+  };
+}
 ----
 
 === `snowflake` extension config
@@ -179,10 +192,10 @@ include::demo-template.env[lines=6..10]
 ----
 
 === `snowflake` extension
-* Config with env vars or JS files
+* Config with env vars, JS files...
 * JWT generation
-* SQL execution
-* Retry / timeout configuration
+* SQL execution (with retry, timeout...)
+* Upload CSV/JSON into Table
 * Clone / Drop schema
 * And more...😃
 
@@ -190,18 +203,6 @@ include::demo-template.env[lines=6..10]
 [source, gherkin]
 ----
 include::features/karate/select-v2.feature[]
-----
-
-=== `karate-config.js` for more configurations
-[source, javascript]
-----
-function fn() {
-  const mySuperFunction = (input) => input.toUpperCase();
-  return {
-    "projectName": "mySuperProject",
-    "myFunction": mySuperFunction
-  };
-}
 ----
 
 [.columns]
@@ -219,14 +220,14 @@ image::diagrams/ddl.svg[width=600]
 
 === How to run ?
 [%step]
-.Standalone JAR
+.☕
 [source, bash, indent=0]
 ----
 include::demo.sh[tags=karate_jar]
 ----
 
 [%step]
-.Docker image
+.🐳
 [source, bash, indent=0]
 ----
 include::demo.sh[tags=karate_docker]
@@ -252,7 +253,7 @@ include::burger_factory/it/features/burger-factory-clone-schemas.feature[]
 
 [background-color="white"]
 [.columns]
-== 🎉 Thank you - Questions?
+== 🎉 Thank you - Questions?+++<br/>+++🥋🥰❄️
 [.column]
 Slides 🖥️::
 image:images/qrcode-slides.png[width=300]

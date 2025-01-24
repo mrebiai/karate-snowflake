@@ -1,10 +1,13 @@
 = karate-snowflake
 
 == Talk Title
-* *EN*: _Don't miss your SQL code with a Karate test_
-* *FR*: _Ne ratez pas votre SQL avec un test Karate_
-
+* *EN* : _Don't miss your SQL code with a Karate test_
+* *FR* : _Ne ratez pas votre SQL avec un test Karate_
 
 == Abstract
 link:abstract_fr.adoc[FR^]
+
+== Sources
+* Open source project : https://github.com/lectra-tech/karate-data[^] (coming soon 🤞)
+* Demo : https://github.com/mrebiai/karate-snowflake[^]
 
