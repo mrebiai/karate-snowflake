@@ -2,7 +2,7 @@ Feature: Demo - Clone Schemas
   Background:
     * json cliConfig = snowflake.cliConfigFromEnv
     * string jwtToken = snowflake.cli.generateJwtToken(cliConfig)
-    * json restConfig = ({...cliConfig, snowflakeConfig: snowflakeConfigs.BREAD, jwtToken: jwtToken})
+    * json restConfig = ({jwtToken, cliConfig, snowflakeConfig: snowflakeConfigs.BREAD})
     * string clientId = "😋_"+lectra.uuid()
     * def genStatement = (table, value) => "INSERT INTO "+table+"(CLIENT_ID, VALUE) VALUES ('"+clientId+"','"+value+"')"
     * json cloneResult = cloneSnowflakeConfigs(restConfig)
@@ -22,7 +22,7 @@ Feature: Demo - Clone Schemas
     And match dbtConsoleOutput contains "Completed successfully"
 
     Then string selectStatement = "SELECT VALUE FROM BURGER WHERE CLIENT_ID='"+clientId+"'"
-    And json response = snowflake.rest.runSql({...cliConfig, snowflakeConfig: cloneResult.snowflakeConfigs.BURGER, statement: selectStatement })
+    And json response = snowflake.rest.runSql({...restConfig, snowflakeConfig: cloneResult.snowflakeConfigs.BURGER, statement: selectStatement })
     And match response.data == [ { "VALUE" : "<output>" } ]
 
     Examples:

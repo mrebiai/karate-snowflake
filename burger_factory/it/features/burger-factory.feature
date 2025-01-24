@@ -2,7 +2,7 @@ Feature: Demo
   Background:
     * json cliConfig = snowflake.cliConfigFromEnv
     * string jwtToken = snowflake.cli.generateJwtToken(cliConfig)
-    * json restConfig = ({...cliConfig, jwtToken: jwtToken}) 
+    * json restConfig = ({jwtToken, cliConfig}) 
     * string clientId = "😋_"+lectra.uuid()
     * def genStatement = (table, value) => "INSERT INTO "+table+"(CLIENT_ID, VALUE) VALUES ('"+clientId+"','"+value+"')"
 
