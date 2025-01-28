@@ -11,3 +11,6 @@ link:abstract_fr.adoc[FR^]
 * Open source project : https://github.com/lectra-tech/karate-data[^] (coming soon 🤞)
 * Demo : https://github.com/mrebiai/karate-snowflake[^]
 
+== Demo - Videos
+* https://youtu.be/cjxMum3lUw0[Standalone JAR^]
+* https://youtu.be/LVF6ASgdu4s[Docker image^]
