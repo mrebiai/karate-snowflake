@@ -1,16 +1,40 @@
 = karate-snowflake
+:icons: font
+:toc: left
 
-== Talk Title
+== Description
+=== Title
 * *EN* : _Don't miss your SQL code with a Karate test_
 * *FR* : _Ne ratez pas votre SQL avec un test Karate_
 
-== Abstract
-link:abstract_fr.adoc[FR^]
+=== Abstract
+* link:abstract_fr.adoc[FR^]
 
 == Sources
 * Open source project : https://github.com/lectra-tech/karate-data[^] (coming soon 🤞)
-* Demo : https://github.com/mrebiai/karate-snowflake[^]
+* Prez & Demo : https://github.com/mrebiai/karate-snowflake[^]
 
-== Demo - Videos
+== Commands
+.Generate slides
+[source,bash]
+----
+./build-slides.sh
+----
+
+.Run the demo (thanks to `karate-data-standalone.jar`)
+[source,bash]
+----
+./demo.sh karate_jar
+----
+
+.Run the demo (thanks to `karate-data:latest` docker image)
+[source,bash]
+----
+./demo.sh karate_docker
+----
+
+NOTE: Create a `demo.env` (example in `demo-template.env`) with your Snowflake credentials
+
+== Videos
 * https://youtu.be/cjxMum3lUw0[Standalone JAR^]
 * https://youtu.be/LVF6ASgdu4s[Docker image^]
