@@ -1,12 +1,12 @@
 = Ne ratez pas votre SQL avec un test Karate
 
 == Contexte
-Je travaille sur une data pipeline basée sur l'architecture ETL (Extract Transform Load) via Kafka Streams et testée via l'outil Open Source [Kapoeira](https://github.com/lectra-tech/kapoeira).
-Mais depuis peu, une partie de la pipeline s'appuie sur l'architecture ELT (Extract Load Transform) via la data plateforme [Snowflake](https://www.snowflake.com) et l'outil [DBT](https://www.getdbt.com).
+Je travaille sur une data pipeline basée sur l'architecture ETL (Extract Transform Load) via Kafka Streams et testée via l'outil Open Source https://github.com/lectra-tech/kapoeira[Kapoeira^].
+Mais depuis peu, une partie de la pipeline s'appuie sur l'architecture ELT (Extract Load Transform) via la data plateforme https://www.snowflake.com[Snowflake] et l'outil https://www.getdbt.com[DBT].
 
 == Problématique & Plan pour y répondre
 Mais comment tester son code SQL Snowflake ou DBT ? Unitairement et en intégration ?
-L'outil Open Source [Karate](https://github.com/karatelabs/karate) pourrait bien y répondre. 
+L'outil Open Source https://github.com/karatelabs/karate[Karate] pourrait bien y répondre. 
 
 == Takeaway
 Je vous propose un outillage simple, facilement adaptable à d'autres contextes techniques, qui donne de l'autonomie à votre QA afin de tester votre code métier.
