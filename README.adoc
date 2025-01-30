@@ -38,3 +38,7 @@ NOTE: Create a `demo.env` (example in `demo-template.env`) with your Snowflake c
 == Videos
 * https://youtu.be/cjxMum3lUw0[Standalone JAR^]
 * https://youtu.be/LVF6ASgdu4s[Docker image^]
+
+
+== Slides
+https://mrebiai.github.io/karate-snowflake/#_slides[Here^]
