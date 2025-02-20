@@ -15,8 +15,8 @@ dbt_run() {
 
 karate_jar() {
   # tag::karate_jar[]
-  java -cp karate-data-standalone.jar -Dextensions=snowflake \
-    com.intuit.karate.Main ${IT_PATH}/features --configdir ${IT_PATH} --reportdir ${REPORTS_PATH} --threads ${NB_THREADS}
+  java -Dextensions=snowflake -jar karate-connect-standalone.jar \
+    ${IT_PATH}/features --configdir ${IT_PATH} --reportdir ${REPORTS_PATH} --threads ${NB_THREADS}
   # end::karate_jar[]
 }
 
@@ -28,7 +28,7 @@ karate_docker() {
     -v ${SNOWFLAKE_PRIVATE_KEY_PATH}:/${SNOWFLAKE_PRIVATE_KEY_PATH} \
     -v $(pwd)/${DBT_PROJECT}:/${DBT_PROJECT} \
     --env-file ./demo.env -e KARATE_EXTENSIONS=snowflake \
-    karate-data:latest ${IT_PATH}/features --configdir ${IT_PATH} --reportdir ${REPORTS_PATH} --threads ${NB_THREADS}
+    karate-connect:latest ${IT_PATH}/features --configdir ${IT_PATH} --reportdir ${REPORTS_PATH} --threads ${NB_THREADS}
   # end::karate_docker[]
 
   # fix permissions

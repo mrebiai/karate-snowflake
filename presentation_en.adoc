@@ -127,19 +127,19 @@ image::diagrams/data-pipeline-elt.svg[width=500]
 * 😃
 
 [.columns]
-== 💡 `karate-data`+++<br/>+++🧩 extensions
+== 💡 `karate-connect`+++<br/>+++🧩 extensions
 [%step]
 [.column width="65%"]
-* ☕ `karate-data-standalone.jar`
+* ☕ `karate-connect-standalone.jar`
 ** ☕ `karate-core.jar` image:images/karatelabs.png[width=60]
-** ☕ `karate-data.jar` image:images/lectra.png[width=80]
+** ☕ `karate-connect.jar` image:images/lectra.png[width=80]
 *** 🧩 `snowflake`, `kubernetes`
 *** +++<p style="color: lightgrey">+++🧩 `rabbitmq`, `kafka`+++</p>+++
 
 [%step]
 [.column]
-* 🐳 `karate-data` 
-** ☕ `karate-data-standalone.jar`
+* 🐳 `karate-connect` 
+** ☕ `karate-connect-standalone.jar`
 ** 🛠️ `dbt`, `kubectl`, `snowflake-cli`
 
 === How to run ?
@@ -147,7 +147,7 @@ image::diagrams/data-pipeline-elt.svg[width=500]
 .☕
 [source, bash]
 ----
-java -cp karate-data-standalone.jar \
+java -cp karate-connect-standalone.jar \
     -Dextensions=<ext1,ext2...> \
     com.intuit.karate.Main <features_path> <optional_params...>
 ----
@@ -160,7 +160,7 @@ docker run --rm \
   -v $(pwd)/<features_path>:/features \
   -v $(pwd)/<reports_path>:/target \
   -e KARATE_EXTENSIONS=<ext1,ext2...>  -e ... \
-  karate-data:latest <optional_params...>
+  karate-connect:latest <optional_params...>
 ----
 
 === How to customize ?
@@ -282,7 +282,7 @@ include::burger_factory/it/features/burger-factory-clone-schemas.feature[]
 
 == Next Steps 🚀
 * Open Source
-** https://github.com/lectra-tech/karate-data 
+** https://github.com/lectra-tech/karate-connect 
 ** ☕ & 🐳
 * Extension `rabbitmq` & `kafka`
 

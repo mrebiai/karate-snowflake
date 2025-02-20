@@ -2,8 +2,8 @@ Feature: SELECT V2
   Background:
     * json cliConfig = read('classpath:cli-config.json')
     * json snowflakeConfig = read('classpath:snowflake-config.json')
-    * string jwtToken = snowflake.cli.generateJwtToken(cliConfig)
-    * json restConfig = ({jwtToken, cliConfig, snowflakeConfig})
+    * string jwt = snowflake.cli.generateJwt(cliConfig)
+    * json restConfig = ({jwt, cliConfig, snowflakeConfig})
 
   Scenario: Select 1 cutter
     Given text statement =

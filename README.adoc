@@ -11,7 +11,7 @@
 * link:abstract_fr.adoc[FR^]
 
 == Sources
-* Open source project : https://github.com/lectra-tech/karate-data[^] (coming soon 🤞)
+* Open source project : https://github.com/lectra-tech/karate-connect[^] (coming soon 🤞)
 * Prez & Demo : https://github.com/mrebiai/karate-snowflake[^]
 
 == Commands
@@ -21,13 +21,13 @@
 ./build-slides.sh
 ----
 
-.Run the demo (thanks to `karate-data-standalone.jar`)
+.Run the demo (thanks to `karate-connect-standalone.jar`)
 [source,bash]
 ----
 ./demo.sh karate_jar
 ----
 
-.Run the demo (thanks to `karate-data:latest` docker image)
+.Run the demo (thanks to `karate-connect:latest` docker image)
 [source,bash]
 ----
 ./demo.sh karate_docker
