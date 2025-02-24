@@ -1,9 +1,9 @@
 Feature: Demo - Clone Schemas
   Background:
     * json cliConfig = snowflake.cliConfigFromEnv
-    * string jwtToken = snowflake.cli.generateJwtToken(cliConfig)
-    * json restConfig = ({jwtToken, cliConfig, snowflakeConfig: snowflakeConfigs.BREAD})
-    * string clientId = "😋_"+lectra.uuid()
+    * string jwt = snowflake.cli.generateJwt(cliConfig)
+    * json restConfig = ({jwt, cliConfig, snowflakeConfig: snowflakeConfigs.BREAD})
+    * string clientId = "😋_"+base.random.uuid()
     * def genStatement = (table, value) => "INSERT INTO "+table+"(CLIENT_ID, VALUE) VALUES ('"+clientId+"','"+value+"')"
     * json cloneResult = cloneSnowflakeConfigs(restConfig)
     * configure afterScenario = function(){ dropSnowflakeConfigs(restConfig, cloneResult.snowflakeConfigs) }

@@ -147,9 +147,9 @@ image::diagrams/data-pipeline-elt.svg[width=500]
 .☕
 [source, bash]
 ----
-java -cp karate-connect-standalone.jar \
-    -Dextensions=<ext1,ext2...> \
-    com.intuit.karate.Main <features_path> <optional_params...>
+java -Dextensions=<ext1,ext2...> \
+    -jar karate-connect-standalone.jar \
+    <features_path> <optional_params...>
 ----
 
 [%step]

@@ -1,9 +1,9 @@
 Feature: Demo
   Background:
     * json cliConfig = snowflake.cliConfigFromEnv
-    * string jwtToken = snowflake.cli.generateJwtToken(cliConfig)
-    * json restConfig = ({jwtToken, cliConfig}) 
-    * string clientId = "😋_"+lectra.uuid()
+    * string jwt = snowflake.cli.generateJwt(cliConfig)
+    * json restConfig = ({jwt, cliConfig})
+    * string clientId = "😋_"+base.random.uuid()
     * def genStatement = (table, value) => "INSERT INTO "+table+"(CLIENT_ID, VALUE) VALUES ('"+clientId+"','"+value+"')"
 
   Scenario Outline: Burger Factory - <bread> + <vegetable> + <meat> = <output>
