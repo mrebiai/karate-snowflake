@@ -11,7 +11,7 @@
 * link:abstract_fr.adoc[FR^]
 
 == Sources
-* Open source project : https://github.com/lectra-tech/karate-connect[^] (coming soon 🤞)
+* Open source project : https://github.com/lectra-tech/karate-connect[^]
 * Prez & Demo : https://github.com/mrebiai/karate-snowflake[^]
 
 == Commands

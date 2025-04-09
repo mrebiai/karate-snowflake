@@ -5,7 +5,7 @@
 
 🇫🇷 _Ne ratez pas votre SQL avec un test Karate_
 
-🇬🇧 _Don't miss your SQL code with a Karate test_
+🇬🇧 _Don't break your SQL code with a Karate test_
 
 
 == 🪄 Once upon a time... ✨
@@ -281,10 +281,8 @@ include::burger_factory/it/features/burger-factory-clone-schemas.feature[]
 ----
 
 == Next Steps 🚀
-* Open Source
-** https://github.com/lectra-tech/karate-connect 
-** ☕ & 🐳
-* Extension `rabbitmq` & `kafka`
+* Extension `kafka`
+* Extension `jdbc`?
 
 [background-color="white"]
 [.columns]
