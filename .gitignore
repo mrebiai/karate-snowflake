@@ -11,4 +11,4 @@ index.adoc
 py_venv
 demo.env
 logs
-
+*.pem

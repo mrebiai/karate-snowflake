@@ -16,7 +16,7 @@ function fn() {
     };
 
     const cloneSnowflakeConfigs = (restConfig) => {
-        const postfix = lectra.uuid().toUpperCase().replaceAll("-","_");
+        const postfix = base.random.uuid().toUpperCase().replaceAll("-","_");
         const clone1 = snowflake.rest.cloneSchema({...restConfig, "schemaToClone": snowflakeConfigSource.schema, "schemaToCreate": snowflakeConfigSource.schema+"_"+postfix}).status;
         const clone2 = snowflake.rest.cloneSchema({...restConfig, "schemaToClone": snowflakeConfig.schema, "schemaToCreate": snowflakeConfig.schema+"_"+postfix}).status;
         if (clone1 !== "OK" || clone2 !== "OK") {
