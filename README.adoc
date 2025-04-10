@@ -21,13 +21,13 @@
 ./build-slides.sh
 ----
 
-.Run the demo (thanks to `karate-connect-standalone.jar`)
+.Run the demo (thanks to `karate-connect-<version>-standalone.jar`)
 [source,bash]
 ----
 ./demo.sh karate_jar
 ----
 
-.Run the demo (thanks to `karate-connect:latest` docker image)
+.Run the demo (thanks to `lectratech/karate-connect:<version>` docker image)
 [source,bash]
 ----
 ./demo.sh karate_docker
