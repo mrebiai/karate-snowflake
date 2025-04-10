@@ -1,0 +1,49 @@
+...@common
+direction: down
+
+Title: {
+    label: karate-connect packaging
+    class: title
+    near: top-center
+}
+
+
+docker: {
+    class: block
+    label: "lectratech/karate-connect:version"
+    style: {
+      fill: lightcyan
+      stroke: darkcyan
+      font-color: black
+      stroke-width: 8
+    }
+    icon: https://icons.terrastruct.com/dev%2Fdocker.svg
+
+    fatJar: {
+        label: "☕ karate-connect-<version>-standalone.jar"
+    }
+    
+    fatJar.karate: {
+        class: app
+        shape: image
+        icon: ../images/karatelabs.png
+        label: "karate.jar"
+    }
+    
+    fatJar.karate-connect: {
+        shape: rectangle
+        label: "karate-connect.jar"
+    }
+    
+    fatJar.karate-connect.extensions: {
+        label: "🧩 snowflake, rabbitmq, kubernetes, dbt\n(kafka, jdbc, ...)"
+    }
+
+    binaries.tools: {
+        label: "dbt,kubectl, snowflake-cli"
+    }
+}
+
+docker.fatJar -> docker.binaries
+
+# TODO steps
