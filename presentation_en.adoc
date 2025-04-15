@@ -127,7 +127,7 @@ image::diagrams/data-pipeline-elt.svg[width=500]
 * 😃
 
 == 💡 `karate-connect`+++<br/>+++
-image::diagrams/packaging.svg[width=800]
+image::diagrams/packaging.svg[width=550]
 
 === How to run ?
 [%step]
