@@ -48,27 +48,19 @@ docker: {
     }
 }
 
+docker.fatJar -> docker.binaries : { 
+    class: arrow
+    label: "calls"
+}
+
 docker.style.opacity: 0
 docker.fatJar.style.opacity: 0
-docker.fatJar.karate.style.opacity: 0
-docker.fatJar.karate-connect.style.opacity: 0
-docker.binaries.style.opacity: 0
 
 steps : {
     1: {
-        docker.fatJar.karate.style.opacity: 1
-    }
-    2: {
-        docker.fatJar.karate-connect.style.opacity: 1
-    }
-    3: {
-        docker.binaries.style.opacity: 1
-        docker.fatJar -> docker.binaries
-    }
-    4: {
         docker.fatJar.style.opacity: 1
     }
-    5: {
+    2: {
         docker.style.opacity: 1
     } 
 }
