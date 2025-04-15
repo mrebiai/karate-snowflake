@@ -4,7 +4,7 @@
 
 == Description
 === Title
-* *EN* : _Don't miss your SQL code with a Karate test_
+* *EN* : _Don't break your SQL code with a Karate test_
 * *FR* : _Ne ratez pas votre SQL avec un test Karate_
 
 === Abstract

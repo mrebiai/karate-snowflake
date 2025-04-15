@@ -5,6 +5,7 @@ vars: {
       theme-id: 1 # Neutral gray
     }
     component-font-size: 25
+    container-font-size: 40
     box-font-size: 50
     title-font-size: 70
 }
@@ -30,6 +31,16 @@ classes: {
         style: {
             font-size: ${box-font-size}
         }
+    }
+    container: {
+        style: {
+            font-size: ${container-font-size}
+            fill: lightcyan
+            stroke: darkcyan
+            font-color: black
+            stroke-width: 8
+          }
+        icon: https://icons.terrastruct.com/dev%2Fdocker.svg
     }
     amqp: {
         shape: image

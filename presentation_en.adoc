@@ -126,21 +126,8 @@ image::diagrams/data-pipeline-elt.svg[width=500]
 * `karate.exec(<any_command>)`
 * 😃
 
-[.columns]
-== 💡 `karate-connect`+++<br/>+++🧩 extensions
-[%step]
-[.column width="65%"]
-* ☕ `karate-connect-standalone.jar`
-** ☕ `karate-core.jar` image:images/karatelabs.png[width=60]
-** ☕ `karate-connect.jar` image:images/lectra.png[width=80]
-*** 🧩 `snowflake`, `kubernetes`
-*** +++<p style="color: lightgrey">+++🧩 `rabbitmq`, `kafka`+++</p>+++
-
-[%step]
-[.column]
-* 🐳 `karate-connect` 
-** ☕ `karate-connect-standalone.jar`
-** 🛠️ `dbt`, `kubectl`, `snowflake-cli`
+== 💡 `karate-connect`+++<br/>+++
+image::diagrams/packaging.svg[width=800]
 
 === How to run ?
 [%step]
