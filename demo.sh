@@ -23,7 +23,7 @@ karate_jar() {
     curl -O -L "https://github.com/lectra-tech/karate-connect/releases/download/v${KARATE_CONNECT_VERSION}/karate-connect-${KARATE_CONNECT_VERSION}-standalone.jar"
   fi
   # tag::karate_jar[]
-  java -Dextensions=snowflake -jar karate-connect-${KARATE_CONNECT_VERSION}-standalone.jar \
+  java -Dextensions=snowflake,dbt -jar karate-connect-${KARATE_CONNECT_VERSION}-standalone.jar \
     ${IT_PATH}/features --configdir ${IT_PATH} --reportdir ${REPORTS_PATH} --threads ${NB_THREADS}
   # end::karate_jar[]
 }
@@ -35,7 +35,7 @@ karate_docker() {
     -v $(pwd)/${REPORTS_PATH}:/${REPORTS_PATH} \
     -v ${SNOWFLAKE_PRIVATE_KEY_PATH}:/${SNOWFLAKE_PRIVATE_KEY_PATH} \
     -v $(pwd)/${DBT_PROJECT}:/${DBT_PROJECT} \
-    --env-file ./demo.env -e KARATE_EXTENSIONS=snowflake \
+    --env-file ./demo.env -e KARATE_EXTENSIONS=snowflake,dbt \
     lectratech/karate-connect:${KARATE_CONNECT_VERSION} \
       ${IT_PATH}/features --configdir ${IT_PATH} --reportdir ${REPORTS_PATH} --threads ${NB_THREADS}
   # end::karate_docker[]

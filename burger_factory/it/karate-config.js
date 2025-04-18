@@ -22,7 +22,7 @@ function fn() {
         if (clone1 !== "OK" || clone2 !== "OK") {
             karate.fail("cloneSnowflakeConfigs failed");
         }
-        return { snowflakeConfigs: genSnowflakeConfigs(postfix), dbtPrefix: "SNOWFLAKE_SCHEMA_SOURCE="+sourceSchema+"_"+postfix+" SNOWFLAKE_SCHEMA="+schema+"_"+postfix};
+        return { snowflakeConfigs: genSnowflakeConfigs(postfix), env: { "SNOWFLAKE_SCHEMA_SOURCE": sourceSchema+"_"+postfix, "SNOWFLAKE_SCHEMA": schema+"_"+postfix}};
     };
 
     const dropSnowflakeConfigs = (restConfig, snowflakeConfigs) => {
