@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-KARATE_CONNECT_VERSION=0.1.0
+KARATE_CONNECT_VERSION=0.2.0
 NB_THREADS=8
 DBT_PROJECT="burger_factory"
 IT_PATH="${DBT_PROJECT}/it"
