@@ -4,13 +4,13 @@
 Karate Connect : votre partenaire de combat dans l'arène des tests API
 
 == Contexte
-Je travaille sur une data pipeline basée initialement sur Kafka Stream et Snowflake. Les tests d'intégration utilisent l'outil Open Source via https://github.com/lectra-tech/kapoeira[Kapoeira^].
+Je travaille sur une data pipeline basée initialement sur Kafka Stream et Snowflake. Les tests d'intégration utilisent l'outil Open Source https://github.com/lectra-tech/kapoeira[Kapoeira^].
 Mais récemment, la pipeline a évolué pour intégrer DBT et se connecter à RabbitMQ et PostgreSQL.
 
 == Problématique & Plan pour y répondre
-Mais comment tester toutes ces API, utilisant plusieurs protocoles (HTTP, AMQP, KAFKA, JDBC) ?
+Mais comment tester toutes ces API, utilisant plusieurs protocoles (HTTP, AMQP, Kafka, JDBC) ?
 Vous connaissez sans doute l'outil Open Source https://github.com/karatelabs/karate[Karate^] pour tester vos API HTTP.
-Il propose des extensions (RabbitMQ, Kafka, ...), pas toujours simples à utiliser ou en mode closed source sous licence payante.
+Il propose des extensions (RabbitMQ, Kafka, ...), pas toujours simples à utiliser ou en mode Closed Source sous licence payante.
 
 == Takeaway
 Je vous propose le partenaire idéal pour relever ce challenge : https://github.com/lectra-tech/karate-connect[Karate Connect^], Open Source, utilisant Karate Core et gérant nativement plusieurs protocoles via ses extensions.
