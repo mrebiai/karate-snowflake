@@ -1,14 +1,17 @@
-= karate-snowflake
+= Karate Connect presentations
 :icons: font
 :toc: left
 
 == Description
-=== Title
-* *EN* : _Don't break your SQL code with a Karate test_
-* *FR* : _Ne ratez pas votre SQL avec un test Karate_
+V1 - karate-snowflake::
+* Title *EN* : _Don't break your SQL code with a Karate test_
+* Title *FR* : _Ne ratez pas votre SQL avec un test Karate_
+* Abstract link:abstractv1_fr.adoc[FR^]
 
-=== Abstract
-* link:abstract_fr.adoc[FR^]
+V2 - karate-connect::
+* Title *EN* : _Karate Connect: your battle partner in the API testing arena_
+* Title *FR* : _Karate Connect : votre partenaire de combat dans l'arène des tests API_
+* Abstract link:abstractv2_fr.adoc[FR^]
 
 == Sources
 * Open source project : https://github.com/lectra-tech/karate-connect[^]
