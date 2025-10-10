@@ -24,8 +24,7 @@ image::diagrams/iot.svg[background,size=contain]
 * Mehdi REBIAI
 * 🧑‍🔧 Tech Lead & Data Engineer @Lectra
 * icon:github[] https://github.com/mrebiai
-* https://github.com/lectra-tech/kapoeira[Kapoeira Maintainer]
-* https://github.com/lectra-tech/karate-connect[Karate Connect Maintainer]
+* https://github.com/lectra-tech/kapoeira[Kapoeira^] & https://github.com/lectra-tech/karate-connect[Karate Connect^] maintainer
 
 === A great pipeline... but sometimes... 😥
 [%step]
@@ -45,13 +44,6 @@ ETL vs ELT...
 === ETL
 image::diagrams/data-pipeline-etl.svg[background,size=contain]
 
-=== image:images/snowflake-text.png[]
-[%step]
-* Data Cloud... DBMS++
-* Snowpark, Stream/Task...
-* STORAGE 💰 dissociated from COMPUTE 💰💰💰
-* Scalable COMPUTE
-
 [.columns]
 === image:images/kapoeira-text.svg[width=100]
 [.column]
@@ -59,31 +51,22 @@ image::diagrams/data-pipeline-etl.svg[background,size=contain]
 * Kafka IT tests (☕ / 🐳)
 * Gherkin & Cucumber (Scala)
 * Code: https://github.com/lectra-tech/kapoeira[^]
-* Slides: https://jvauchel.github.io/kapoeira-dance/[^]
 
 [.column]
 [%step]
 video::ELFCAgdgSro[youtube, width=500]
 
-=== Kapoeira - Example (1/2)
-image::images/burger-factory.svg[width=800]
+=== Kapoeira
+image::images/fries-factory.svg[width=500]
 
-=== Kapoeira - Example (2/2)
 [source, gherkin]
 ----
-include::features/kapoeira/burger-factory.feature[]
+include::features/kapoeira/fries-factory.feature[]
 ----
 
 [%notitle]
 === ELT
 image::diagrams/data-pipeline-elt.svg[background,size=contain]
-
-=== image:images/dbt-text.svg[width=200]
-[%step]
-* Python tool for data transformation
-* SQL generation through Jinja2 templates
-* Code: https://github.com/dbt-labs/dbt-utils[^]
-* Since `v1.8`, https://docs.getdbt.com/docs/build/unit-tests[unit tests^]
 
 [.columns]
 === image:images/karatelabs.png[width=200]
@@ -103,32 +86,40 @@ video::NYlPxd5dZOU[youtube, width=500]
 include::features/karate/hello-world.feature[]
 ----
 
-=== Karate - HTTP+++<br/>+++Snowflake - JDBC SQL+++<br/>+++🤔
-[%step]
-* https://docs.snowflake.com/en/developer-guide/snowflake-rest-api/snowflake-rest-api[Snowflake REST API & Authentication^]
-* https://docs.snowflake.com/developer-guide/snowflake-cli/index[Snowflake CLI^] (JWT generation,...)
-* https://docs.snowflake.com/en/developer-guide/sql-api/index[Snowflake SQL API^]
-* 😃
-
-=== Karate/Snowflake - Example
+=== Karate calling Snowflake REST API
 [source, gherkin]
 ----
 include::features/karate/select-v1.feature[]
 ----
 
-[.columns]
-=== Complex for a SELECT...😠+++<br/>+++Run Task & DBT ?🤔
-[.column]
-image::diagrams/data-pipeline-elt.svg[width=500]
+=== Karate API Testing 👍 & 👎
+[%autowidth]
+|===
+| | Ok? | Comments
+| Snowflake | ✅ | But complex API
+| Kafka | ❌ | Closed source addon
+| Rabbitmq | ❌ | Just code example for addon
+| DBT | ✅ | Thanks to `karate.exec(...)`
+|===
 
-[.column]
-[%step]
-* Karate DSL extension - https://github.com/karatelabs/karate-examples[Examples^]
-* `karate.exec(<any_command>)`
-* 😃
+== 💡 Karate Connect =+++<br/>+++Karate Core + Extensions ready to use
 
-== 💡 `karate-connect`+++<br/>+++
-image::diagrams/packaging.svg[width=550]
+.DSL syntax
+[source, gherkin]
+----
+* def result1 = <extension>.<value>
+* def result2 = <extension>.<feature>.<function>(args)
+----
+
+.Example
+[source, gherkin]
+----
+* json cliConfig     = snowflake.cliConfigFromEnv
+* def rabbitmqClient = rabbitmq.topology.createClient({ host: "localhost", port: 5672 })
+----
+
+
+=== Packaging+++<br/>+++image:diagrams/packaging.svg[width=550]
 
 === How to run ?
 [%step]
@@ -152,77 +143,24 @@ docker run --rm \
 ----
 
 === How to customize ?
-.`karate-config.js`
-[source, javascript]
-----
-function fn() {
-  const mySuperFunction = (input) => input.toUpperCase();
-  return {
-    "projectName": "mySuperProject",
-    "myFunction": mySuperFunction
-  };
-}
-----
+See https://karatelabs.github.io/karate[karate documentation^] for anything related to Karate Core.
 
-See https://karatelabs.github.io/karate/#environment-specific-config[karate documentation^] for file location
+=== All existing extensions
+[%autowidth]
+* https://github.com/lectra-tech/karate-connect?tab=readme-ov-file#base[`base`^]: common functions (uuid, time, ...)
+* https://github.com/lectra-tech/karate-connect?tab=readme-ov-file#rabbitmq[`rabbitmq`^]: RabbitMQ integration
+* https://github.com/lectra-tech/karate-connect?tab=readme-ov-file#kafka[`kafka`^]: Kafka integration
+* https://github.com/lectra-tech/karate-connect?tab=readme-ov-file#snowflake[`snowflake`^]: Snowflake integration
+* https://github.com/lectra-tech/karate-connect?tab=readme-ov-file#kubernetes[`kubernetes`^]: `kubectl create job -from=cronjob/...`
+* https://github.com/lectra-tech/karate-connect?tab=readme-ov-file#dbt[`dbt`^]: `dbt run ...`
 
-[.columns]
-=== `snowflake` extension config
-[%step]
-[.column]
---
-[source, bash]
-.`cli-config`
-----
-SNOWFLAKE_ACCOUNT=xxx.west-europe.azure
-SNOWFLAKE_USER=MY_USER
-SNOWFLAKE_PRIVATE_KEY_PATH=/my-path/private-key.pem
-PRIVATE_KEY_PASSPHRASE=my-passphrase
-----
+=== More? (coming soon)
+* `redis`
+* `mongodb`
+* `jdbc` (+ jar for JDBC driver)
+* your private extension (built by yourself) and loaded in karate-connect classpath
 
-[source, javascript]
-----
-{ 
-  "account": "xxx.west-europe.azure",
-  "user": "MY_USER",
-  "privateKeyPath": "/my-path/private-key.pem",
-  "privateKeyPassphrase": "my-passphrase"
-}
-----
---
-
-[%step]
-[.column]
---
-.`snowflake-config`
-[source, bash]
-----
-SNOWFLAKE_DATABASE=MY_DB
-SNOWFLAKE_SCHEMA=MY_SCHEMA
-SNOWFLAKE_ROLE=MY_ROLE
-SNOWFLAKE_WAREHOUSE=MY_WH
-----
-
-[source, javascript]
-----
-{
-  "database": "MY_DB",
-  "schema": "MY_SCHEMA"
-  "role": "MY_ROLE",
-  "warehouse": "MY_WH"
-}
-----
---
-
-=== `snowflake` extension
-* Config with env vars, JS files...
-* JWT generation
-* SQL execution (with retry, timeout...)
-* Upload CSV/JSON into Table
-* Clone / Drop schema
-* And more...😃
-
-=== Karate/Snowflake - Example
+=== Snowflake extension - Example
 [source, gherkin]
 ----
 include::features/karate/select-v2.feature[]
@@ -233,55 +171,20 @@ include::features/karate/select-v2.feature[]
 
 * https://medium.com/snowflake/streaming-data-from-snowflake-to-kafka-ed76ce0400c2
 
-[%step]
-[.column]
-Kafka version+++<br/>+++image:images/burger-factory.svg[width=600]
-
-[%step]
-[.column]
-Snowflake version+++<br/>+++image:diagrams/burger-factory.svg[width=400]
-
-=== DDL
-image::diagrams/ddl.svg[width=600]
-
-=== How to run ?
-[%step]
-.☕
-[source, bash, indent=0]
-----
-include::demo.sh[tags=karate_jar]
-----
-
-[%step]
-.🐳
-[source, bash, indent=0]
-----
-include::demo.sh[tags=karate_docker]
-----
-
-=== `burger-factory.feature`
-[source, gherkin]
-----
-include::burger_factory/it/features/burger-factory.feature[]
-----
-
-=== Clone schemas...
-[source, gherkin]
-----
-include::burger_factory/it/features/burger-factory-clone-schemas.feature[]
-----
 
 == Next Steps 🚀
-* Extension `kafka`
-* Extension `jdbc`?
+* We need stars 🌟!
+* We need contributors 🙏!
+
+https://github.com/lectra-tech/karate-connect[^]
 
 [background-color="white"]
 [.columns]
-== 🎉 Thank you - Questions?+++<br/>+++🥋🥰❄️
+== 🎉 Thank you - Questions?+++<br/>+++🥋
 [.column]
 Slides 🖥️::
 image:images/qrcode-slides.png[width=300]
 
 [.column]
 Feedback🙏::
-image:images/qrcode-feedback.png[width=300]
+image:images/qrcode-{confName}-feedback.png[width=300]
