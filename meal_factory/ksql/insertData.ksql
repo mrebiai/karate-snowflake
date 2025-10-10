@@ -1,0 +1,4 @@
+INSERT INTO potato_input (key, value) VALUES ('${clientId}', '${potato}');
+INSERT INTO bread_input (key, value) VALUES ('${clientId}', '${bread}');
+INSERT INTO meat_input (key, value) VALUES ('${clientId}', '${meat}');
+INSERT INTO vegetable_input (key, value) VALUES ('${clientId}', '${vegetable}');

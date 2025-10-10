@@ -1,0 +1,155 @@
+services:
+
+  broker:
+    image: confluentinc/cp-kafka:8.0.0
+    hostname: broker
+    container_name: broker
+    ports:
+      - "9092:9092"
+      - "9101:9101"
+    environment:
+      KAFKA_NODE_ID: 1
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: 'CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT'
+      KAFKA_ADVERTISED_LISTENERS: 'PLAINTEXT://broker:29092,PLAINTEXT_HOST://localhost:9092'
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0
+      KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
+      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
+      KAFKA_JMX_PORT: 9101
+      KAFKA_JMX_HOSTNAME: localhost
+      KAFKA_PROCESS_ROLES: 'broker,controller'
+      KAFKA_CONTROLLER_QUORUM_VOTERS: '1@broker:29093'
+      KAFKA_LISTENERS: 'PLAINTEXT://broker:29092,CONTROLLER://broker:29093,PLAINTEXT_HOST://0.0.0.0:9092'
+      KAFKA_INTER_BROKER_LISTENER_NAME: 'PLAINTEXT'
+      KAFKA_CONTROLLER_LISTENER_NAMES: 'CONTROLLER'
+      KAFKA_LOG_DIRS: '/tmp/kraft-combined-logs'
+      # Replace CLUSTER_ID with a unique base64 UUID using "bin/kafka-storage.sh random-uuid"
+      # See https://docs.confluent.io/kafka/operations-tools/kafka-tools.html#kafka-storage-sh
+      CLUSTER_ID: 'MkU3OEVBNTcwNTJENDM2Qk'
+      # Auto-create topics
+      KAFKA_AUTO_CREATE_TOPICS_ENABLE: 'true'
+      KAFKA_DELETE_TOPIC_ENABLE: 'true'
+    healthcheck:
+      test: ["CMD-SHELL", "kafka-broker-api-versions --bootstrap-server broker:29092"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # connect:
+  #   image: cnfldemos/kafka-connect-datagen:0.6.4-7.6.0
+  #   hostname: connect
+  #   container_name: connect
+  #   depends_on:
+  #     - broker
+  #     # - schema-registry
+  #   ports:
+  #     - "8083:8083"
+  #   environment:
+  #     CONNECT_BOOTSTRAP_SERVERS: 'broker:29092'
+  #     CONNECT_REST_ADVERTISED_HOST_NAME: connect
+  #     CONNECT_GROUP_ID: compose-connect-group
+  #     CONNECT_CONFIG_STORAGE_TOPIC: docker-connect-configs
+  #     CONNECT_CONFIG_STORAGE_REPLICATION_FACTOR: 1
+  #     CONNECT_OFFSET_FLUSH_INTERVAL_MS: 10000
+  #     CONNECT_OFFSET_STORAGE_TOPIC: docker-connect-offsets
+  #     CONNECT_OFFSET_STORAGE_REPLICATION_FACTOR: 1
+  #     CONNECT_STATUS_STORAGE_TOPIC: docker-connect-status
+  #     CONNECT_STATUS_STORAGE_REPLICATION_FACTOR: 1
+  #     CONNECT_KEY_CONVERTER: org.apache.kafka.connect.storage.StringConverter
+  #     #CONNECT_VALUE_CONVERTER: io.confluent.connect.avro.AvroConverter
+  #     CONNECT_VALUE_CONVERTER: org.apache.kafka.connect.storage.StringConverter
+  #     # CONNECT_VALUE_CONVERTER_SCHEMA_REGISTRY_URL: http://schema-registry:8081
+  #     CONNECT_PLUGIN_PATH: "/usr/share/java,/usr/share/confluent-hub-components"
+
+  ksqldb-server:
+    image: confluentinc/cp-ksqldb-server:8.0.0
+    hostname: ksqldb-server
+    container_name: ksqldb-server
+    depends_on:
+      broker:
+        condition: service_healthy
+      # - connect
+    ports:
+      - "8088:8088"
+    environment:
+      KSQL_CONFIG_DIR: "/etc/ksql"
+      KSQL_BOOTSTRAP_SERVERS: "broker:29092"
+      KSQL_HOST_NAME: ksqldb-server
+      KSQL_LISTENERS: "http://0.0.0.0:8088"
+      KSQL_CACHE_MAX_BYTES_BUFFERING: 0
+      # KSQL_KSQL_CONNECT_URL: "http://connect:8083"
+      KSQL_KSQL_LOGGING_PROCESSING_TOPIC_REPLICATION_FACTOR: 1
+      KSQL_KSQL_LOGGING_PROCESSING_TOPIC_AUTO_CREATE: 'true'
+      KSQL_KSQL_LOGGING_PROCESSING_STREAM_AUTO_CREATE: 'true'
+      # Auto-create topics for internal usage
+      KSQL_KSQL_STREAMS_AUTO_OFFSET_RESET: 'earliest'
+      KSQL_KSQL_COMMIT_INTERVAL_MS: 2000
+      KSQL_KSQL_CACHE_MAX_BYTES_BUFFERING: 10000000
+      KSQL_KSQL_STREAMS_NUM_STREAM_THREADS: 1
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:8088/info || exit 1"]
+      interval: 15s
+      timeout: 10s
+      retries: 5
+
+  ksqldb-create-streams:
+    image: confluentinc/cp-ksqldb-cli:8.0.0
+    container_name: ksqldb-create-streams
+    volumes:
+      - ./meal_factory/ksql:/opt/ksql
+    depends_on:
+      ksqldb-server:
+        condition: service_healthy
+    entrypoint: ksql
+    command:
+      - http://ksqldb-server:8088
+      - --file
+      - /opt/ksql/createStreams.ksql
+    restart: "no"
+
+  kafka-ui:
+    image: provectuslabs/kafka-ui:latest
+    container_name: kafka-ui
+    depends_on:
+      broker:
+        condition: service_healthy
+    ports:
+      - "8080:8080"
+    environment:
+      KAFKA_CLUSTERS_0_NAME: fast-food-cluster
+      KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: broker:29092
+      KAFKA_CLUSTERS_0_KSQLDBSERVER: http://ksqldb-server:8088
+
+  ksqldb-data-generator:
+    image: confluentinc/cp-ksqldb-cli:8.0.0
+    container_name: ksqldb-data-generator
+    volumes:
+      - ./meal_factory/ksql:/opt/ksql
+    depends_on:
+      ksqldb-create-streams:
+        condition: service_completed_successfully
+    entrypoint: >
+      bash -c "
+        echo 'Starting data generator...' &&
+        sleep 20 &&
+        while true; do
+          RANDOM_CLIENT_ID=$$(cat /proc/sys/kernel/random/uuid | cut -d'-' -f1) &&
+          ALL_POTATOES=('🥔' '🥕' '🧅' '🥔' '🥔') &&
+          RANDOM_POTATO=$${ALL_POTATOES[$$RANDOM % $${#ALL_POTATOES[@]}]} &&
+          ALL_BREADS=('🍞' '🥖' '🥐' '🍞' '🍞') &&
+          RANDOM_BREAD=$${ALL_BREADS[$$RANDOM % $${#ALL_BREADS[@]}]} &&
+          ALL_MEATS=('🥩' '🍗' '🐟' '🥩' '🥩') &&
+          RANDOM_MEAT=$${ALL_MEATS[$$RANDOM % $${#ALL_MEATS[@]}]} &&
+          ALL_VEGETABLES=('🍅' '🥬' '🌽' '🍅' '🍅') &&
+          RANDOM_VEGETABLE=$${ALL_VEGETABLES[$$RANDOM % $${#ALL_VEGETABLES[@]}]} &&
+          cat /opt/ksql/insertData.ksql | sed 's/$${clientId}/'$$RANDOM_CLIENT_ID'/g'  \\
+            | sed 's/$${potato}/'$$RANDOM_POTATO'/g' \\
+            | sed 's/$${bread}/'$$RANDOM_BREAD'/g' \\
+            | sed 's/$${meat}/'$$RANDOM_MEAT'/g' \\
+            | sed 's/$${vegetable}/'$$RANDOM_VEGETABLE'/g' > /tmp/ksql_insert_data.ksql &&
+          ksql http://ksqldb-server:8088 --file /tmp/ksql_insert_data.ksql &&
+          echo 'Inserted data for client:' $$RANDOM_CLIENT_ID ' - potato:' $$RANDOM_POTATO ' bread:' $$RANDOM_BREAD ' meat:' $$RANDOM_MEAT ' vegetable:' $$RANDOM_VEGETABLE
+        done
+      "
+    restart: "no"
+    tty: true

@@ -1,0 +1,100 @@
+-- Create input streams
+CREATE STREAM potato_input (
+    key STRING key,
+    value STRING
+) WITH (
+    KAFKA_TOPIC='potato',
+    VALUE_FORMAT='JSON',
+    PARTITIONS=1
+);
+
+CREATE STREAM bread_input (
+    key STRING key,
+    value STRING
+) WITH (
+    KAFKA_TOPIC='bread',
+    VALUE_FORMAT='JSON',
+    PARTITIONS=1
+);
+
+CREATE STREAM meat_input (
+    key STRING key,
+    value STRING
+) WITH (
+    KAFKA_TOPIC='meat',
+    VALUE_FORMAT='JSON',
+    PARTITIONS=1
+);
+
+CREATE STREAM vegetable_input (
+    key STRING key,
+    value STRING
+) WITH (
+    KAFKA_TOPIC='vegetable',
+    VALUE_FORMAT='JSON',
+    PARTITIONS=1
+);
+
+-- Create output streams
+CREATE STREAM fries_output WITH (
+    KAFKA_TOPIC='fries',
+    VALUE_FORMAT='JSON',
+    PARTITIONS=1
+) AS
+SELECT 
+    key,
+    AS_VALUE(key) AS client_id,
+    CASE 
+        WHEN value = '🥔' THEN '🍟'
+        ELSE value
+    END AS processed_food
+FROM potato_input
+WHERE value IS NOT NULL
+EMIT CHANGES;
+
+
+CREATE STREAM burger_output WITH (
+    KAFKA_TOPIC='burger',
+    VALUE_FORMAT='JSON',
+    PARTITIONS=1
+) AS
+SELECT 
+    bread.key AS key,
+    AS_VALUE(bread.key) AS client_id,
+    CASE 
+        WHEN bread.value IN ('🍞', '🥖') AND meat.value IN ('🥩', '🍗', '🐟') AND vegetable.value IN ('🍅', '🥬') THEN '🍔'
+        ELSE concat(bread.value, ' + ', meat.value, ' + ', vegetable.value)
+    END AS processed_food,
+    bread.value AS bread_value,
+    meat.value AS meat_value,
+    vegetable.value AS vegetable_value
+FROM bread_input bread
+JOIN meat_input meat
+    WITHIN 5 MINUTES
+    ON bread.key = meat.key
+JOIN vegetable_input vegetable
+    WITHIN 5 MINUTES
+    ON bread.key = vegetable.key
+WHERE bread.value IS NOT NULL
+  AND meat.value IS NOT NULL
+  AND vegetable.value IS NOT NULL
+EMIT CHANGES;
+
+CREATE STREAM meal_output WITH (
+    KAFKA_TOPIC='meal',
+    VALUE_FORMAT='JSON',
+    PARTITIONS=1
+) AS
+SELECT 
+    burger.key AS key,
+    burger.client_id AS client_id,
+    burger.processed_food AS burger,
+    fries.processed_food AS fries
+FROM burger_output burger
+JOIN fries_output fries
+    WITHIN 5 MINUTES
+    ON burger.key = fries.key
+WHERE burger.processed_food IS NOT NULL
+  AND fries.processed_food IS NOT NULL
+EMIT CHANGES;
+
