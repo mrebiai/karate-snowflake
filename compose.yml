@@ -153,3 +153,22 @@ services:
       "
     restart: "no"
     tty: true
+
+  karate-connect:
+    image: lectratech/karate-connect:0.5.1-minimal
+    container_name: karate-connect
+    volumes:
+      - ./meal_factory/it/features:/features
+      - ./target:/target
+      - ./meal_factory/it/karate-config.js:/karate-config.js
+    environment:
+      KARATE_EXTENSIONS: kafka
+    command:
+      - '--clean'
+      - '--threads'
+      - '8'
+      - '/features'
+    depends_on:
+      ksqldb-create-streams:
+        condition: service_completed_successfully
+
