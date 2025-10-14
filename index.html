@@ -444,7 +444,6 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_description">Description</a></li>
 <li><a href="#_sources">Sources</a></li>
 <li><a href="#_commands">Commands</a></li>
-<li><a href="#_videos">Videos</a></li>
 <li><a href="#_slides">Slides</a></li>
 </ul>
 </div>
@@ -516,15 +515,10 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 </div>
 <div class="listingblock">
-<div class="title">Run the demo (thanks to <code>karate-connect-&lt;version&gt;-standalone.jar</code>)</div>
+<div class="title">Demo <code>burger-factory</code> (batching)</div>
 <div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">./demo.sh karate_jar</code></pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="title">Run the demo (thanks to <code>lectratech/karate-connect:&lt;version&gt;</code> docker image)</div>
-<div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">./demo.sh karate_docker</code></pre>
+<pre class="highlight"><code class="language-bash" data-lang="bash">./demo.sh karate_jar
+./demo.sh karate_docker</code></pre>
 </div>
 </div>
 <div class="admonitionblock note">
@@ -539,20 +533,26 @@ Create a <code>demo.env</code> (example in <code>demo-template.env</code>) with 
 </tr>
 </table>
 </div>
+<div class="listingblock">
+<div class="title">Demo <code>meal-factory</code> (streaming)</div>
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">docker compose build
+docker compose up -d
+docker compose restart karate-connect
+docker compose down</code></pre>
 </div>
 </div>
-<div class="sect1">
-<h2 id="_videos">Videos</h2>
-<div class="sectionbody">
-<div class="ulist">
-<ul>
-<li>
-<p><a href="https://youtu.be/cjxMum3lUw0" target="_blank" rel="noopener">Standalone JAR</a></p>
-</li>
-<li>
-<p><a href="https://youtu.be/LVF6ASgdu4s" target="_blank" rel="noopener">Docker image</a></p>
-</li>
-</ul>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<a href="http://localhost:8080" class="bare" target="_blank" rel="noopener">http://localhost:8080</a> (for kafka ui), <a href="http://localhost:15672" class="bare" target="_blank" rel="noopener">http://localhost:15672</a> (for rabbitmq ui)
+</td>
+</tr>
+</table>
 </div>
 </div>
 </div>
@@ -574,7 +574,7 @@ Create a <code>demo.env</code> (example in <code>demo-template.env</code>) with 
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2025-10-14 14:13:13 UTC
+Last updated 2025-10-14 16:16:02 UTC
 </div>
 </div>
 </body>
