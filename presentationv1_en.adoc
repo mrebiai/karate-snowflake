@@ -255,6 +255,10 @@ include::demo.sh[tags=karate_jar]
 include::demo.sh[tags=karate_docker]
 ----
 
+=== Videos
+* https://youtu.be/cjxMum3lUw0[Standalone JAR^]
+* https://youtu.be/LVF6ASgdu4s[Docker image^]
+
 === `burger-factory.feature`
 [source, gherkin]
 ----

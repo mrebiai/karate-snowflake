@@ -166,11 +166,13 @@ See https://karatelabs.github.io/karate[karate documentation^] for anything rela
 include::features/karate/select-v2.feature[]
 ----
 
-[.columns]
 == Demo Time 🎬
 
-* https://medium.com/snowflake/streaming-data-from-snowflake-to-kafka-ed76ce0400c2
+=== meal-factory (streaming)
+image:diagrams/meal-factory.svg[width=800]
 
+=== burger-factory (batching)
+image:diagrams/burger-factory.svg[width=500]
 
 == Next Steps 🚀
 * We need stars 🌟!

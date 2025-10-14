@@ -8,12 +8,27 @@ vars: {
     container-font-size: 40
     box-font-size: 50
     title-font-size: 70
+    arrow-font-size: 20
 }
 classes: {
     arrow: {
         style {
             animated: true
         }
+    }
+    arrowStream: {
+        style {
+            animated: true
+            font-size: ${arrow-font-size}
+        }
+        label: "stream"
+    }
+    arrowBridge: {
+        style {
+            animated: true
+            font-size: ${arrow-font-size}
+        }
+        label: "bridge"
     }
     app: {
         shape: image

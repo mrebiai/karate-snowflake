@@ -1,0 +1,26 @@
+...@common
+
+ingredients-exchange: { class: amqp }
+meal-exchange: { class: amqp }
+
+bread: { class: kafka }
+vegetable: { class: kafka }
+meat: { class: kafka }
+burger: { class: kafka }
+potato: { class: kafka }
+sideDishes: { class: kafka }
+meal: { class: kafka }
+
+bread -> burger: { class: arrowStream }
+vegetable -> burger: { class: arrowStream }
+meat -> burger: { class: arrowStream }
+potato -> sideDishes: { class: arrowStream }
+burger -> meal: { class: arrowStream }
+sideDishes -> meal: { class: arrowStream }
+
+ingredients-exchange -> bread: { class: arrowBridge }
+ingredients-exchange -> vegetable: { class: arrowBridge }
+ingredients-exchange -> meat: { class: arrowBridge }
+ingredients-exchange -> potato: { class: arrowBridge }
+
+meal -> meal-exchange: { class: arrowBridge }

@@ -190,7 +190,7 @@ services:
       - ./target:/target
       - ./meal_factory/it/karate-config.js:/karate-config.js
     environment:
-      KARATE_EXTENSIONS: kafka
+      KARATE_EXTENSIONS: kafka,rabbitmq
     command:
       - '--clean'
       - '--threads'

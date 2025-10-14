@@ -24,24 +24,25 @@ V2 - karate-connect::
 ./build-slides.sh
 ----
 
-.Run the demo (thanks to `karate-connect-<version>-standalone.jar`)
+.Demo `burger-factory` (batching)
 [source,bash]
 ----
 ./demo.sh karate_jar
-----
-
-.Run the demo (thanks to `lectratech/karate-connect:<version>` docker image)
-[source,bash]
-----
 ./demo.sh karate_docker
 ----
 
 NOTE: Create a `demo.env` (example in `demo-template.env`) with your Snowflake credentials
 
-== Videos
-* https://youtu.be/cjxMum3lUw0[Standalone JAR^]
-* https://youtu.be/LVF6ASgdu4s[Docker image^]
+.Demo `meal-factory` (streaming)
+[source,bash]
+----
+docker compose build
+docker compose up -d
+docker compose restart karate-connect
+docker compose down
+----
 
+NOTE: http://localhost:8080[^] (for kafka ui), http://localhost:15672[^] (for rabbitmq ui)
 
 == Slides
 https://mrebiai.github.io/karate-snowflake/#_slides[Here^]

@@ -38,8 +38,8 @@ class RabbitToKafka(
         bindings = [
             QueueBinding(
                 value = Queue(value = "meal-queue", durable = "true"),
-                exchange = Exchange(value = "meal-exchange", type = "fanout", durable = "true"),
-                key = ["meal-rk"]
+                exchange = Exchange(value = "meal-exchange", type = "topic", durable = "true"),
+                key = ["meal-rk.*"]
             )
         ]
     )

@@ -16,7 +16,7 @@ class KafkaToRabbit(
 
     @KafkaListener(topics = ["meal"], groupId = "bridge-group")
     fun listen(record: ConsumerRecord<String, String>) {
-        rabbitTemplate.send("meal-exchange", "meal-rk",
+        rabbitTemplate.send("meal-exchange", "meal-rk.${record.key()}",
             Message(
                 record.value().toByteArray(),
                 MessagePropertiesBuilder.newInstance()
