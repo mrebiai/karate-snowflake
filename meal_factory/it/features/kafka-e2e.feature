@@ -9,22 +9,22 @@ Feature: kafka-e2e
     Scenario: From ingredients to meal - nominal case
         ### INGREDIENTS ###
         # potato
-        Given json record = ({ key: clientId, value: '{"VALUE":"🥔"}' })
+        Given json record = ({ key: clientId, value: '{"value":"🥔"}' })
         When json result = kafka.message.produce({ kafkaClient, topic: "potato", record })
         Then match result.status == "OK"
         * karate.log(result.recordMetadata)
         # bread
-        Given json record = ({ key: clientId, value: '{"VALUE":"🍞"}' })
+        Given json record = ({ key: clientId, value: '{"value":"🍞"}' })
         When json result = kafka.message.produce({ kafkaClient, topic: "bread", record })
         Then match result.status == "OK"
         * karate.log(result.recordMetadata)
         # meat
-        Given json record = ({ key: clientId, value: '{"VALUE":"🥩"}' })
+        Given json record = ({ key: clientId, value: '{"value":"🥩"}' })
         When json result = kafka.message.produce({ kafkaClient, topic: "meat", record })
         Then match result.status == "OK"
         * karate.log(result.recordMetadata)
         # vegetable
-        Given json record = ({ key: clientId, value: '{"VALUE":"🥬"}' })
+        Given json record = ({ key: clientId, value: '{"value":"🥬"}' })
         When json result = kafka.message.produce({ kafkaClient, topic: "vegetable", record })
         Then match result.status == "OK"
         * karate.log(result.recordMetadata)
@@ -34,9 +34,9 @@ Feature: kafka-e2e
         Then match result.status == "OK"
         And match (result.data.length) == 1
         And json meal = result.data[0].value
-        And match meal.CLIENT_ID == clientId
-        And match meal.BURGER == "🍔"
-        And match meal.FRIES == "🍟"
+        And match meal.clientId == clientId
+        And match meal.burger == "🍔"
+        And match meal.sideDishes == "🍟"
 
     Scenario: From ingredients to meal - error case
         ### INGREDIENTS ###
@@ -46,7 +46,7 @@ Feature: kafka-e2e
             | "bread"     | "🍞"  |
             | "meat"      | "🥕"  |
             | "vegetable" | "🥬"  |
-        And json responses = karate.map(ingredients, (row) => kafka.message.produce({ kafkaClient, topic: row.topic, record: ({ key: clientId, value: '{"VALUE":"' + row.value + '"}' })}).status)
+        And json responses = karate.map(ingredients, (row) => kafka.message.produce({ kafkaClient, topic: row.topic, record: ({ key: clientId, value: '{"value":"' + row.value + '"}' })}).status)
         And match each responses == "OK"
 
         ### MEAL ###
@@ -54,11 +54,11 @@ Feature: kafka-e2e
         Then match result.status == "OK"
         And match (result.data.length) == 1
         And json meal = result.data[0].value
-        And match meal.CLIENT_ID == clientId
-        And match meal.BURGER == "🍞 + 🥕 + 🥬"
-        And match meal.FRIES == "🍟"
+        And match meal.clientId == clientId
+        And match meal.burger == "🍞 + 🥕 + 🥬"
+        And match meal.sideDishes == "🍟"
 
-    Scenario Outline: From ingredients to meal - example case (<potato> + <bread> + <meat> + <vegetable> = <burger> + <fries>)
+    Scenario Outline: From ingredients to meal - example case (<potato> + <bread> + <meat> + <vegetable> = <burger> + <sideDishes>)
         ### INGREDIENTS ###
         Given table ingredients
             | topic       | value         |
@@ -66,7 +66,7 @@ Feature: kafka-e2e
             | "bread"     | "<bread>"     |
             | "meat"      | "<meat>"      |
             | "vegetable" | "<vegetable>" |
-        And json responses = karate.map(ingredients, (row) => kafka.message.produce({ kafkaClient, topic: row.topic, record: ({ key: clientId, value: '{"VALUE":"' + row.value + '"}' })}).status)
+        And json responses = karate.map(ingredients, (row) => kafka.message.produce({ kafkaClient, topic: row.topic, record: ({ key: clientId, value: '{"value":"' + row.value + '"}' })}).status)
         And match each responses == "OK"
 
         ### MEAL ###
@@ -74,14 +74,14 @@ Feature: kafka-e2e
         Then match result.status == "OK"
         And match (result.data.length) == 1
         And json meal = result.data[0].value
-        And match meal.CLIENT_ID == clientId
-        And match meal.BURGER == "<burger>"
-        And match meal.FRIES == "<fries>"
+        And match meal.clientId == clientId
+        And match meal.burger == "<burger>"
+        And match meal.sideDishes == "<sideDishes>"
 
         Examples:
-            | potato | bread | meat | vegetable | burger       | fries |
-            | 🥔     | 🍞    | 🥩   | 🥬        | 🍔           | 🍟    |
-            | 🥔     | 🍞    | 🍗   | 🍅        | 🍔           | 🍟    |
-            | 🥦     | 🍞    | 🐟   | 🥬        | 🍔           | 🥦    |
-            | 🥔     | 🍞    | 🥕   | 🥬        | 🍞 + 🥕 + 🥬 | 🍟    |
+            | potato | bread | meat | vegetable | burger       | sideDishes |
+            | 🥔     | 🍞    | 🥩   | 🥬        | 🍔           | 🍟         |
+            | 🥔     | 🍞    | 🍗   | 🍅        | 🍔           | 🍟         |
+            | 🥦     | 🍞    | 🐟   | 🥬        | 🍔           | 🥦         |
+            | 🥔     | 🍞    | 🥕   | 🥬        | 🍞 + 🥕 + 🥬 | 🍟         |
 

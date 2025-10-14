@@ -133,7 +133,7 @@ services:
         echo 'Starting data generator...' &&
         sleep 20 &&
         while true; do
-          RANDOM_CLIENT_ID=$$(cat /proc/sys/kernel/random/uuid | cut -d'-' -f1) &&
+          RANDOM_CLIENT_ID=$$(cat /proc/sys/kernel/random/uuid) &&
           ALL_POTATOES=('🥔' '🥕' '🧅' '🥔' '🥔') &&
           RANDOM_POTATO=$${ALL_POTATOES[$$RANDOM % $${#ALL_POTATOES[@]}]} &&
           ALL_BREADS=('🍞' '🥖' '🥐' '🍞' '🍞') &&
