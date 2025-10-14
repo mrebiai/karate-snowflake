@@ -1,5 +1,15 @@
 services:
 
+  rabbitmq:
+    image: rabbitmq:4.1.4-management-alpine
+    container_name: rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
+
   broker:
     image: confluentinc/cp-kafka:8.0.0
     hostname: broker
@@ -153,6 +163,24 @@ services:
       "
     restart: "no"
     tty: true
+
+  bridge:
+    build:
+      context: ./meal_factory/bridge
+      dockerfile: Dockerfile
+    container_name: bridge
+    depends_on:
+      rabbitmq:
+        condition: service_started
+      ksqldb-create-streams:
+        condition: service_completed_successfully
+    environment:
+      SPRING_RABBITMQ_HOST: rabbitmq
+      SPRING_RABBITMQ_VIRTUAL_HOST: /
+      SPRING_RABBITMQ_PORT: 5672
+      SPRING_RABBITMQ_USERNAME: guest
+      SPRING_RABBITMQ_PASSWORD: guest
+      KAFKA_BOOTSTRAP_SERVERS: broker:29092
 
   karate-connect:
     image: lectratech/karate-connect:0.5.1-minimal

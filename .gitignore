@@ -12,3 +12,4 @@ py_venv
 demo.env
 logs
 *.pem
+.gradle

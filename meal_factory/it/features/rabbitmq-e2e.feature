@@ -1,0 +1,1 @@
+# {"potato":"🥔","bread":"🍞","meat":"🥩","vegetable":"🥬"}
