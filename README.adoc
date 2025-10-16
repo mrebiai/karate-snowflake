@@ -27,6 +27,7 @@ V2 - karate-connect::
 .Demo `burger-factory` (batching)
 [source,bash]
 ----
+source .envrc
 ./demo.sh karate_jar
 ./demo.sh karate_docker
 ----
