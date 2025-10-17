@@ -30,7 +30,7 @@ Feature: kafka-e2e
         * karate.log(result.recordMetadata)
 
         ### MEAL ###
-        When json result = kafka.message.consumeByKey({ consumer, key: clientId, timeoutSeconds: 60, maxMessages: 1 })
+        When json result = kafka.message.consumeByKey({ consumer, key: clientId, timeoutSeconds: 10, maxMessages: 1 })
         Then match result.status == "OK"
         And match (result.data.length) == 1
         And json meal = result.data[0].value
@@ -50,7 +50,7 @@ Feature: kafka-e2e
         And match each responses == "OK"
 
         ### MEAL ###
-        When json result = kafka.message.consumeByKey({ consumer, key: clientId, timeoutSeconds: 60, maxMessages: 1 })
+        When json result = kafka.message.consumeByKey({ consumer, key: clientId, timeoutSeconds: 10, maxMessages: 1 })
         Then match result.status == "OK"
         And match (result.data.length) == 1
         And json meal = result.data[0].value
@@ -70,7 +70,7 @@ Feature: kafka-e2e
         And match each responses == "OK"
 
         ### MEAL ###
-        When json result = kafka.message.consumeByKey({ consumer, key: clientId, timeoutSeconds: 60, maxMessages: 1 })
+        When json result = kafka.message.consumeByKey({ consumer, key: clientId, timeoutSeconds: 10, maxMessages: 1 })
         Then match result.status == "OK"
         And match (result.data.length) == 1
         And json meal = result.data[0].value

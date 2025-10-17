@@ -21,7 +21,7 @@ Feature: rabbitmq-e2e
         * match result.status == "OK"
 
         ### MEAL ###
-        * json consumeConfig = ({ rabbitmqClient, queueName: queueConfig.name, timeoutSeconds: 60, minNbMessages: 1 })
+        * json consumeConfig = ({ rabbitmqClient, queueName: queueConfig.name, timeoutSeconds: 10, minNbMessages: 1 })
         * json result = rabbitmq.message.consume(consumeConfig)
         * match result.status == "OK"
         * match result.data[0].properties.headers.clientId == clientId
@@ -41,7 +41,7 @@ Feature: rabbitmq-e2e
         * match result.status == "OK"
 
         ### MEAL ###
-        * json consumeConfig = ({ rabbitmqClient, queueName: queueConfig.name, timeoutSeconds: 60, minNbMessages: 1 })
+        * json consumeConfig = ({ rabbitmqClient, queueName: queueConfig.name, timeoutSeconds: 10, minNbMessages: 1 })
         * json result = rabbitmq.message.consume(consumeConfig)
         * match result.status == "OK"
         * match result.data[0].properties.headers.clientId == clientId
@@ -61,7 +61,7 @@ Feature: rabbitmq-e2e
         * match result.status == "OK"
 
         ### MEAL ###
-        * json consumeConfig = ({ rabbitmqClient, queueName: queueConfig.name, timeoutSeconds: 60, minNbMessages: 1 })
+        * json consumeConfig = ({ rabbitmqClient, queueName: queueConfig.name, timeoutSeconds: 10, minNbMessages: 1 })
         * json result = rabbitmq.message.consume(consumeConfig)
         * match result.status == "OK"
         * match result.data[0].properties.headers.clientId == clientId
